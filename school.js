@@ -4,9 +4,9 @@ const regions = {
       강남구: ['개원초등학교', '개일초등학교', '개포초등학교', '구룡초등학교', '논현초등학교', '대곡초등학교', '대도초등학교', '대모초등학교', '대왕초등학교', '대치초등학교', '도곡초등학교', '매헌초등학교', '봉은초등학교', '삼성초등학교', '세명초등학교', '수서초등학교', '언북초등학교', '언주초등학교', '역삼초등학교', '왕북초등학교', '자곡초등학교', '청담초등학교', '학동초등학교', '압구정초등학교', '포이초등학교', '개원중학교', '개포중학교', '구룡중학교', '단국대학교사범대학부속중학교', '대명중학교', '대왕중학교', '대청중학교', '대치중학교', '도곡중학교', '세곡중학교', '수서중학교', '신구중학교', '신사중학교', '압구정중학교', '언남중학교', '언주중학교', '역삼중학교', '청담중학교', '휘문중학교', '중동중학교', '봉은중학교', '숙명여자중학교', '진선여자중학교', '은성중학교', '삼성중학교', '경기고등학교', '개포고등학교', '국립국악고등학교', '단국대학교사범대학부속고등학교', '경기여자고등학교', '서울세종고등학교', '수도전기공업고등학교', '숙명여자고등학교', '압구정고등학교', '언남고등학교', '영동고등학교', '은광여자고등학교', '중동고등학교', '중산고등학교', '진선여자고등학교', '청담고등학교', '휘문고등학교', '현대고등학교', '세화고등학교', '세화여자고등학교', '풍문고등학교', '서울로봇고등학교', '서울컨벤션고등학교', '대진디자인고등학교', '서울공연예술고등학교', '경기상업고등학교', '서울전자고등학교', '서초고등학교', '양재고등학교', '반포고등학교'],
       서초구: ['서울교육대학교부설초등학교', '반원초등학교', '방배초등학교', '방일초등학교', '방현초등학교', '서래초등학교', '서원초등학교', '서이초등학교', '서초초등학교', '신동초등학교', '신중초등학교', '양재초등학교', '언남초등학교', '우면초등학교', '원명초등학교', '원촌초등학교', '잠원초등학교', '청계초등학교', '방현초등학교', '반포초등학교', '서울방배초등학교', '서울서초초등학교', '서울잠원초등학교', '서울원촌초등학교', '경원중학교', '동덕여자중학교', '반포중학교', '방배중학교', '서운중학교', '서문여자중학교', '서초중학교', '신동중학교', '신반포중학교', '언남중학교', '원촌중학교', '이수중학교', '세화여자중학교', '서울고등학교', '서초고등학교', '양재고등학교', '반포고등학교', '세화고등학교', '세화여자고등학교', '서문여자고등학교', '상문고등학교', '언남고등학교', '서울전자고등학교', '한국외국인학교', '서초문화예술정보학교'],
       송파구: ['가동초등학교', '가락초등학교', '가원초등학교', '가주초등학교', '거여초등학교', '거원초등학교', '남천초등학교', '마천초등학교', '문덕초등학교', '문정초등학교', '문현초등학교', '방이초등학교', '방산초등학교', '삼전초등학교', '석촌초등학교', '송례초등학교', '송전초등학교', '송파초등학교', '신가초등학교', '신천초등학교', '오금초등학교', '오륜초등학교', '잠동초등학교', '잠실초등학교', '잠전초등학교', '풍납초등학교', '풍성초등학교', '해누리초등학교', '위례별초등학교', '버들초등학교', '가락중학교', '거여중학교', '거원중학교', '문정중학교', '문현중학교', '방산중학교', '방이중학교', '배명중학교', '보인중학교', '삼전중학교', '석촌중학교', '송례중학교', '송정중학교', '송파중학교', '신천중학교', '오륜중학교', '오주중학교', '잠신중학교', '잠실중학교', '잠실여자중학교', '정신여자중학교', '풍납중학교', '풍성중학교', '한산중학교', '해누리중학교', '위례솔중학교', '마천중학교', '서울체육중학교', '가락고등학교', '문정고등학교', '보성고등학교', '보인고등학교', '방산고등학교', '배명고등학교', '서울체육고등학교', '영동일고등학교', '영파여자고등학교', '오금고등학교', '잠신고등학교', '잠실고등학교', '잠실여자고등학교', '잠일고등학교', '정신여자고등학교', '한림연예예술고등학교', '창덕여자고등학교', '일신여자고등학교', '문현고등학교', '송파공업고등학교', '서울인공지능고등학교', '강동고등학교', '한영고등학교', '배재고등학교', '선사고등학교', '대명중학교', '성내중학교', '한영중학교', '성덕여자중학교', '위례초등학교', '위례솔초등학교', '서울컨벤션고등학교'],
-      강동구: ['한영고', '배재고', '강동고', '선사고'],
-      마포구: ['서울여고', '숭문고', '광성고', '성산중'],
-      강서구: ['명덕고', '덕원고', '경복여고', '마곡중'],
+      강동구: ['강덕초', '강동초', '강일초', '고덕초', '고명초', '고일초', '길동초', '대명초', '둔촌초', '명덕초', '명원초', '명일초', '묘곡초', '상일초', '선린초', '선사초', '성내초', '성일초', '신명초', '신암초', '위례초', '천동초', '천일초', '천호초', '한산초', '강명초', '고현초', '강솔초', '강빛초', '강일중', '고덕중', '동북중', '동신중', '둔촌중', '명일중', '배재중', '상일중', '성내중', '성덕여자중', '신명중', '신암중', '천일중', '천호중', '한산중', '한영중', '강명중', '강동중', '강빛중', '강동고', '광문고', '동북고', '둔촌고', '명일여자고', '배재고', '상일여자고', '한영고', '한영외국어고', '상일미디어고', '컨벤션고', '성덕고', '강일고', '선사고'],
+      마포구: ['공덕초', '동교초', '마포초', '망원초', '상암초', '서강초', '서교초', '성산초', '성서초', '성원초', '소의초', '신북초', '신석초', '아현초', '염리초', '용강초', '중동초', '창천초', '한서초', '홍익대학교사범대학부속초', '상지초', '하늘초', '경성중', '광성중', '동도중', '여자중', '성사중', '성산중', '성서중', '숭문중', '신수중', '아현중', '중암중', '홍익대학교사범대학부속여자중', '상암중', '창천중', '경성고', '광성고', '여자고', '숭문고', '홍익대학교사범대학부속여자고', '디자인고', '홍익디자인고', '한세사이버보안고', '상암고'],
+      강서구: ['가곡초', '가양초', '개화초', '공진초', '공항초', '내발산초', '등명초', '등서초', '등양초', '등원초', '등촌초', '등현초', '발산초', '방화초', '백석초', '삼정초', '송정초', '송화초', '신곡초', '신월초', '신정초', '양천초', '염동초', '염창초', '우장초', '월정초', '정곡초', '치현초', '탑산초', '화곡초', '유석초', '염경초', '화일초', '수명초', '등마초', '가락초', '녹명초', '대사초', '대상초', '대저초', '덕두초', '명지초', '배영초', '신호초', '천가초', '명호초', '남명초', '녹산초', '송정초', '오션초', '신명초', '명일초', '명원초', '대저중앙초', '명문초', '강서초', '경서중', '공항중', '덕원중', '등명중', '등원중', '등촌중', '마포중', '명덕여자중', '방원중', '방화중', '백석중', '삼정중', '성재중', '송정중', '신정여자중', '염창중', '화곡중', '화원중', '염경중', '수명중', '마곡중', '마곡하늬중', '낙동중', '녹산중', '대저중', '덕문중', '명호중', '신호중', '지사중', '명지중', '경일중', '오션중', '가락중', '경복여자고', '공항고', '대일고', '덕원여자고', '마포고', '명덕고', '명덕여자고', '영일고', '한광고', '한서고', '화곡고', '명덕외국어고', '디지털콘텐츠고', '동양고', '영등포공업고', '신정고', '덕원예술고', '경복비즈니스고', '백영고', '홍신고', '등촌고', '세현고', '수명고', '경일고', '덕문고', '강서고', '남고', '대저고', '소프트웨어마이스터고', '명호고'],
       영등포구: ['여의도고', '영등포고', '당산서중', '문래중'],
       노원구: ['대진고', '서라벌고', '상계고', '중계중'],
       도봉구: ['도봉고', '창동고', '누원고', '노곡중'],
@@ -72,7 +72,7 @@ const districtCounts = {
 };
 const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character]);
 const slugify = (region, district, school) => encodeURIComponent(`${region}|${district}|${school}`);
-const getSchoolLevel = (school) => schoolMeta[school]?.level || (school.includes('초등학교') ? '초등학교' : school.includes('중학교') || school.endsWith('중') ? '중학교' : '고등학교');
+const getSchoolLevel = (school) => schoolMeta[school]?.level || (school.includes('초등학교') || school.endsWith('초') ? '초등학교' : school.includes('중학교') || school.endsWith('중') ? '중학교' : '고등학교');
 
 function findSchool(value) {
   if (!value) return null;
@@ -102,6 +102,40 @@ function renderDirectory(selectedRegion = '서울') {
   }));
   document.querySelector('#school-search').addEventListener('input', (event) => renderDistricts(document.querySelector('.region-tab.active').dataset.region, event.target.value));
   renderDistricts(selectedRegion);
+}
+
+function renderGangdongDirectory(displayName = '강동', district = '강동구') {
+  document.title = `${displayName} 학교별 과외 | studyplus.kr`;
+  const schools = regions.서울.districts[district];
+  const schoolGroups = [
+    ['초등학교', '🎒', schools.filter((school) => getSchoolLevel(school) === '초등학교')],
+    ['중학교', '📚', schools.filter((school) => getSchoolLevel(school) === '중학교')],
+    ['고등학교', '🎓', schools.filter((school) => getSchoolLevel(school) === '고등학교')]
+  ];
+  const totalSchools = schoolGroups.reduce((total, [, , groupSchools]) => total + groupSchools.length, 0);
+  app.innerHTML = `<section class="gangdong-hero"><div class="section-wrap gangdong-hero-inner"><div><p class="eyebrow">SCHOOL-SPECIALIZED TUTORING · GANGDONG</p><h1><em>강동</em> 학교별 과외</h1><p>강동 소재 초·중·고 학교별 시험 범위와<br />학습 흐름에 맞춘 1:1 맞춤 과외 상담</p><div class="gangdong-actions"><a class="primary-button" href="index.html#apply">무료 상담 신청 <span>→</span></a><a class="back-link" href="school.html?a=서울">← 지역 선택</a></div></div><div class="gangdong-hero-stat"><strong>${totalSchools}<small>개</small></strong><span>강동 학교 데이터</span><i>학교별 내신 전담 선생님</i></div></div></section><section class="gangdong-directory section-wrap"><div class="directory-top"><div><p class="eyebrow">FIND YOUR SCHOOL</p><h2>강동 ${totalSchools}개 학교</h2></div><label class="school-search"><span>⌕</span><input id="gangdong-search" type="search" placeholder="학교 이름으로 검색" aria-label="강동 학교 이름 검색" /></label></div><div class="gangdong-school-groups">${schoolGroups.map(([level, icon, groupSchools]) => `<section class="gangdong-school-group"><div class="gangdong-group-heading"><span>${icon}</span><h3>${level}</h3><small>${groupSchools.length}개 학교</small></div><div class="gangdong-school-grid">${groupSchools.map((school) => `<a class="gangdong-school-card" data-school="${escapeHtml(school)}" href="${schoolLink('서울', district, school)}"><strong>${escapeHtml(school)}</strong><span>↗</span></a>`).join('')}</div></section>`).join('')}</div><p class="gangdong-empty" hidden>검색한 학교가 없습니다. 다른 학교 이름으로 찾아보세요.</p></section><section class="school-callout"><div class="section-wrap callout-inner"><div><p class="eyebrow">READY TO START?</p><h2>학교를 골라도 고민이 남는다면,<br /><em>무료 상담</em>으로 먼저 물어보세요.</h2></div><a class="primary-button" href="index.html#apply">맞춤 상담 신청하기 <span>→</span></a></div></section>`;
+  document.querySelector('.gangdong-hero h1 em').textContent = displayName;
+  document.querySelector('.gangdong-hero .eyebrow').textContent = `SCHOOL-SPECIALIZED TUTORING · ${displayName.toUpperCase()}`;
+  document.querySelector('.gangdong-hero h1').lastChild.textContent = ' 학교별 과외';
+  document.querySelector('.gangdong-hero p:not(.eyebrow)').innerHTML = `${displayName} 소재 초·중·고 학교별 시험 범위와<br />학습 흐름에 맞춘 1:1 맞춤 과외 상담`;
+  document.querySelector('.gangdong-hero-stat span').textContent = `${displayName} 학교 데이터`;
+  document.querySelector('.gangdong-directory h2').textContent = `${displayName} ${totalSchools}개 학교`;
+  document.querySelector('#gangdong-search').setAttribute('aria-label', `${displayName} 학교 이름 검색`);
+  document.querySelector('#gangdong-search').addEventListener('input', (event) => {
+    const query = event.target.value.trim().toLowerCase();
+    let visibleCount = 0;
+    document.querySelectorAll('.gangdong-school-group').forEach((group) => {
+      let groupCount = 0;
+      group.querySelectorAll('.gangdong-school-card').forEach((card) => {
+        const visible = card.dataset.school.toLowerCase().includes(query);
+        card.hidden = !visible;
+        if (visible) groupCount += 1;
+      });
+      group.hidden = groupCount === 0;
+      visibleCount += groupCount;
+    });
+    document.querySelector('.gangdong-empty').hidden = visibleCount !== 0;
+  });
 }
 
 function renderDistricts(regionName, query = '') {
@@ -141,6 +175,9 @@ function renderDetail(schoolData) {
 const selectedSchool = new URLSearchParams(window.location.search).get('school');
 const selectedSchoolData = findSchool(selectedSchool);
 const selectedRegion = new URLSearchParams(window.location.search).get('a');
-if (selectedSchoolData) renderDetail(selectedSchoolData); else renderDirectory(regions[selectedRegion] ? selectedRegion : '서울');
+const isGangdongPage = new URLSearchParams(window.location.search).get('r') === 'gangdong';
+const isMapoPage = new URLSearchParams(window.location.search).get('r') === 'mapo';
+const isGangseoPage = new URLSearchParams(window.location.search).get('r') === 'gangseo';
+if (selectedSchoolData) renderDetail(selectedSchoolData); else if (isGangdongPage) renderGangdongDirectory(); else if (isMapoPage) renderGangdongDirectory('마포', '마포구'); else if (isGangseoPage) renderGangdongDirectory('강서', '강서구'); else renderDirectory(regions[selectedRegion] ? selectedRegion : '서울');
 
 document.querySelector('.menu-button').addEventListener('click', () => document.querySelector('.nav-links').classList.toggle('mobile-open'));
