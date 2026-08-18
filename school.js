@@ -105,7 +105,7 @@ function renderDirectory(selectedRegion = '서울') {
 }
 
 function renderGangdongDirectory(displayName = '강동', district = '강동구') {
-  document.title = `${displayName} 학교별 과외 | studyplus.kr`;
+  document.title = `${displayName} 학교별 과외 | 스마일레슨`;
   const schools = regions.서울.districts[district];
   const schoolGroups = [
     ['초등학교', '🎒', schools.filter((school) => getSchoolLevel(school) === '초등학교')],
@@ -168,7 +168,8 @@ function renderDistricts(regionName, query = '') {
 
 function renderDetail(schoolData) {
   const { region, district, school, meta } = schoolData;
-  document.title = `${region} ${school} 과외 | studyplus.kr`;
+  document.title = `${region} ${district} ${school} 과외 | 스마일레슨`;
+  document.querySelector('meta[name="description"]').setAttribute('content', `${school} 학생을 위한 ${meta.level} 학교별 내신 과외. 시험 범위와 출제 경향에 맞춘 1:1 맞춤 수업을 스마일레슨에서 상담받아보세요.`);
   app.innerHTML = `<section class="school-detail-hero section-wrap"><a class="back-link" href="school.html">← 학교 목록으로</a><div class="breadcrumb">학교별 과외 <span>/</span> ${escapeHtml(district)} <span>/</span> ${escapeHtml(school)}</div><div class="detail-label"><span>✓ 학교별 분석 완료</span><small>${escapeHtml(meta.level)} · ${escapeHtml(meta.tag)}</small></div><h1>${escapeHtml(district)} <em>${escapeHtml(school)}</em> 과외</h1><p>학교 시험의 흐름을 읽고, 학생의 현재 위치에서<br />다음 등급까지 이어지는 1:1 전담 수업을 시작합니다.</p><a class="primary-button" href="index.html#apply">${escapeHtml(school)} 맞춤 상담 신청 <span>→</span></a></section><section class="detail-facts section-wrap"><div><span>학교</span><strong>${escapeHtml(school)}</strong></div><div><span>지역</span><strong>${escapeHtml(region)} ${escapeHtml(district)}</strong></div><div><span>대상</span><strong>${escapeHtml(meta.level)} 재학생</strong></div><div><span>과목</span><strong>${escapeHtml(meta.subjects)}</strong></div></section><section class="detail-content section-wrap"><div class="detail-main"><p class="eyebrow">WHY SCHOOL-SPECIALIZED</p><h2>${escapeHtml(school)} 내신에<br /><em>맞춰야 하는 이유</em></h2><p class="detail-lead">같은 학년이어도 학교마다 진도, 교과서, 서술형의 기준이 다릅니다. ${escapeHtml(school)}의 시험 범위와 자주 나오는 유형을 기준으로 학습 계획을 세우고, 학생의 약점은 기초부터 다시 연결합니다.</p><div class="detail-points"><article><span>01</span><h3>시험 범위 진단</h3><p>이번 시험의 범위와 지난 시험 오답을 함께 확인해 꼭 필요한 단원부터 시작합니다.</p></article><article><span>02</span><h3>학교 맞춤 풀이</h3><p>학교의 문제 스타일에 맞춰 서술형, 고난도, 시간 관리까지 단계별로 연습합니다.</p></article><article><span>03</span><h3>수업 후 관리</h3><p>수업 기록과 복습 루틴을 남겨 혼자 공부하는 시간까지 이어지도록 돕습니다.</p></article></div></div><aside class="detail-aside"><p class="eyebrow">SUBJECTS</p><h3>과목별 전담 수업</h3><ul>${meta.subjects.split(' · ').map((subject) => `<li><span>${subject}</span><b>→</b></li>`).join('')}</ul><a href="index.html#apply" class="outline-button">선생님 추천받기 <span>↗</span></a></aside></section><section class="detail-source"><div class="section-wrap"><span>학교 정보 기준</span><p>학교명과 학교급은 학교알리미 전국학교현황 공개 목록을 참고했습니다. 주소, 학생 수, 설립 구분 등 최신 공시 정보는 원문에서 확인해 주세요.</p><a href="${schoolInfoUrl}" target="_blank" rel="noreferrer">학교알리미 전국학교현황 확인 <span>↗</span></a></div></section><section class="detail-bottom"><div class="section-wrap"><p class="eyebrow">A BETTER START</p><h2>지금 ${escapeHtml(school)}<br /><em>전담 선생님</em>을 만나보세요.</h2><p>무료 체험 수업 후 아이와 맞는지 천천히 결정할 수 있습니다.</p><a class="primary-button" href="index.html#apply">무료 상담 신청 <span>→</span></a></div></section>`;
 }
 
