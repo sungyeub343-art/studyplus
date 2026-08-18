@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">스마일레슨 로고</title>
+  <desc id="desc">코랄색 둥근 사각형 안에 웃는 얼굴과 작은 별이 있는 심볼</desc>
+  <rect width="64" height="64" rx="18" fill="#F46B5F"/>
+  <circle cx="32" cy="32" r="19" fill="#FFFDF9"/>
+  <circle cx="25" cy="29" r="2.6" fill="#17243D"/>
+  <circle cx="39" cy="29" r="2.6" fill="#17243D"/>
+  <path d="M23 37c2.6 4.6 6.1 6.9 10.2 6.9 4.1 0 7.6-2.3 10.2-6.9" fill="none" stroke="#17243D" stroke-linecap="round" stroke-width="3.2"/>
+  <path d="M49 10.5v7M45.5 14h7" fill="none" stroke="#FFFDF9" stroke-linecap="round" stroke-width="2.4"/>
+</svg>
