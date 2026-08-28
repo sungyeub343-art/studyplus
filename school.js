@@ -10,7 +10,7 @@ const regions = {
       영등포구: ['당산초', '당서초', '당중초', '대길초', '대동초', '대방초', '대영초', '도림초', '도신초', '문래초', '신대림초', '신영초', '여의도초', '영동초', '영등포초', '영림초', '영신초', '영원초', '영중초', '우신초', '윤중초', '영문초', '선유초', '당산서중', '당산중', '대림중', '대영중', '문래중', '선유중', '양화중', '여의도중', '영남중', '영원중', '윤중중', '신길중', '관악고', '대영고', '여의도고', '여의도여자고', '영등포여자고', '영신고', '장훈고', '한강미디어고', '선유고'],
       노원구: ['상명초', '계상초', '공릉초', '공연초', '노원초', '노일초', '녹천초', '당현초', '동일초', '불암초', '상경초', '상계초', '상곡초', '상수초', '상원초', '상월초', '상천초', '선곡초', '수락초', '수암초', '신계초', '신상계초', '연지초', '연촌초', '온곡초', '용동초', '용원초', '원광초', '월계초', '을지초', '중계초', '중원초', '중평초', '중현초', '청계초', '태랑초', '태릉초', '한천초', '청원초', '태강삼육초', '화랑초', '덕암초', '공릉중', '광운중', '노원중', '노일중', '녹천중', '불암중', '상경중', '상계제일중', '상계중', '상명중', '상원중', '수락중', '신상중', '신창중', '염광중', '온곡중', '월계중', '재현중', '중계중', '중원중', '중평중', '청원중', '태랑중', '하계중', '한천중', '을지중', '노원고', '대진고', '대진여자고', '상계고', '상명고', '서라벌고', '수락고', '염광고', '영신여자고', '용화여자고', '재현고', '청원고', '청원여자고', '한국삼육고', '혜성여자고', '기계공업고', '광운인공지능고', '미래산업과학고', '아이티고', '인덕과학기술고', '영신간호비즈니스고', '염광메디텍고', '동산고', '월계고', '불암고'],
       도봉구: ['동북초', '누원초', '도봉초', '방학초', '백운초', '숭미초', '신방학초', '신창초', '신학초', '신화초', '쌍문초', '오봉초', '월천초', '자운초', '창경초', '창도초', '창동초', '창림초', '창원초', '창일초', '초당초', '한신초', '가인초', '노곡중', '도봉중', '방학중', '백운중', '북서울중', '선덕중', '신도봉중', '신방학중', '정의여자중', '창동중', '창북중', '창일중', '효문중', '선덕고', '정의여자고', '창동고', '외국어고', '세그루패션디자인고', '문화고', '누원고', '자운고', '효문고'],
-      강북구: ['신일고', '혜화여고', '영훈고', '수유중'],
+      강북구: ['미양초', '번동초', '삼각산초', '삼양초', '송중초', '송천초', '수송초', '수유초', '오현초', '우이초', '유현초', '인수초', '화계초', '영훈초', '강북중', '번동중', '서라벌중', '성암여자중', '수송중', '수유중', '신일중', '영훈국제중', '인수중', '창문여자중', '화계중', '삼각산중', '솔샘중', '신일고', '영훈고', '창문여자고', '혜화여자고', '성암국제무역고', '삼각산고', '솔샘고'],
       성북구: ['경희초등학교', '고려대사대부고', '경동고', '성신여고', '길음중'],
       동대문구: ['경희고', '휘경여고', '청량고', '전농중'],
       중랑구: ['송곡고', '면목고', '신현고', '중화중'],
@@ -106,6 +106,7 @@ function renderDirectory(selectedRegion = '서울') {
 
 function renderGangdongDirectory(displayName = '강동', district = '강동구') {
   document.title = `${displayName} 학교별 과외 | 스터디플러스`;
+  document.querySelector('meta[name="description"]').setAttribute('content', `${displayName} 소재 초중고 학교별 시험 범위와 학습 흐름에 맞춘 1:1 과외 상담을 받아보세요.`);
   const schools = regions.서울.districts[district];
   const schoolGroups = [
     ['초등학교', '🎒', schools.filter((school) => getSchoolLevel(school) === '초등학교')],
@@ -182,6 +183,7 @@ const isGangseoPage = new URLSearchParams(window.location.search).get('r') === '
 const isYeongdeungpoPage = new URLSearchParams(window.location.search).get('r') === 'yeongdeungpo';
 const isNowonPage = new URLSearchParams(window.location.search).get('r') === 'nowon';
 const isDobongPage = new URLSearchParams(window.location.search).get('r') === 'dobong';
-if (selectedSchoolData) renderDetail(selectedSchoolData); else if (isGangdongPage) renderGangdongDirectory(); else if (isMapoPage) renderGangdongDirectory('마포', '마포구'); else if (isGangseoPage) renderGangdongDirectory('강서', '강서구'); else if (isYeongdeungpoPage) renderGangdongDirectory('영등포', '영등포구'); else if (isNowonPage) renderGangdongDirectory('노원', '노원구'); else if (isDobongPage) renderGangdongDirectory('도봉', '도봉구'); else renderDirectory(regions[selectedRegion] ? selectedRegion : '서울');
+const isGangbukPage = new URLSearchParams(window.location.search).get('r') === 'gangbuk';
+if (selectedSchoolData) renderDetail(selectedSchoolData); else if (isGangdongPage) renderGangdongDirectory(); else if (isMapoPage) renderGangdongDirectory('마포', '마포구'); else if (isGangseoPage) renderGangdongDirectory('강서', '강서구'); else if (isYeongdeungpoPage) renderGangdongDirectory('영등포', '영등포구'); else if (isNowonPage) renderGangdongDirectory('노원', '노원구'); else if (isDobongPage) renderGangdongDirectory('도봉', '도봉구'); else if (isGangbukPage) renderGangdongDirectory('강북', '강북구'); else renderDirectory(regions[selectedRegion] ? selectedRegion : '서울');
 
 document.querySelector('.menu-button').addEventListener('click', () => document.querySelector('.nav-links').classList.toggle('mobile-open'));
