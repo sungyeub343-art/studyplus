@@ -16,6 +16,12 @@
     <loc>https://studyplus.kr/school.html?r=dongdaemun</loc>
   </url>
   <url>
+    <loc>https://studyplus.kr/school.html?r=jungnang</loc>
+    <lastmod>2026-09-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://studyplus.kr/school.html?r=nowon</loc>
     <lastmod>2026-08-21</lastmod>
     <changefreq>weekly</changefreq>
