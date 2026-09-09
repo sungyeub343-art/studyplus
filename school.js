@@ -30,7 +30,7 @@ const regions = {
   경기도: {
     districts: window.gyeonggiDistricts
   },
-  인천: { districts: { 남동구: ['인천고', '인제고', '논현고', '구월중'], 연수구: ['연수고', '송도고', '옥련여고', '신송중'] } },
+  인천: { districts: window.incheonDistricts },
   부산: { districts: { 해운대구: ['센텀고', '해운대고', '대천중', '동백중'], 부산진구: ['부산진고', '개성고', '가야고', '초읍중'] } },
   대전: { districts: { 서구: ['둔산여고', '대전고', '충남고', '삼천중'], 유성구: ['대덕고', '노은고', '전민고', '노은중'] } },
   대구: { districts: { 수성구: ['경북고', '대구여고', '대륜고', '범어중'], 달서구: ['대건고', '대구상원고', '월서중', '월암중'] } },
@@ -182,7 +182,8 @@ const districtRoutes = {
   jungnang: ['중랑', '중랑구'], gwangjin: ['광진', '광진구'], seongdong: ['성동', '성동구'], yongsan: ['용산', '용산구'],
   jongno: ['종로', '종로구'], seodaemun: ['서대문', '서대문구'], eunpyeong: ['은평', '은평구'], yangcheon: ['양천', '양천구'],
   guro: ['구로', '구로구'], geumcheon: ['금천', '금천구'], gwanak: ['관악', '관악구'], dongjak: ['동작', '동작구'],
-  ...window.gyeonggiDistrictRoutes
+  ...window.gyeonggiDistrictRoutes,
+  ...window.incheonDistrictRoutes
 };
 const selectedDistrict = districtRoutes[new URLSearchParams(window.location.search).get('r')];
 if (selectedSchoolData) renderDetail(selectedSchoolData); else if (selectedDistrict) renderGangdongDirectory(...selectedDistrict); else renderDirectory(regions[selectedRegion] ? selectedRegion : '서울');
