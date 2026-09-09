@@ -28,14 +28,7 @@ const regions = {
     }
   },
   경기도: {
-    districts: {
-      '성남시 분당구': ['분당중앙고', '서현고', '수내고', '늘푸른중'],
-      '수원시 영통구': ['영덕고', '태장고', '광교고', '영일중'],
-      '용인시 수지구': ['수지고', '홍천고', '죽전고', '이현중'],
-      '고양시 일산서구': ['대화고', '주엽고', '일산대진고', '오마중'],
-      '안양시 동안구': ['평촌고', '신성고', '동안고', '귀인중'],
-      '부천시 원미구': ['중흥고', '상일고', '부천여고', '중원중']
-    }
+    districts: window.gyeonggiDistricts
   },
   인천: { districts: { 남동구: ['인천고', '인제고', '논현고', '구월중'], 연수구: ['연수고', '송도고', '옥련여고', '신송중'] } },
   부산: { districts: { 해운대구: ['센텀고', '해운대고', '대천중', '동백중'], 부산진구: ['부산진고', '개성고', '가야고', '초읍중'] } },
@@ -86,8 +79,7 @@ function schoolLink(region, district, school) {
 }
 
 function districtLink(region, district) {
-  if (region !== '서울') return '';
-  const route = Object.entries(districtRoutes).find(([, [, routeDistrict]]) => routeDistrict === district)?.[0];
+  const route = Object.entries(districtRoutes).find(([, [, routeDistrict, routeRegion = '서울']]) => routeDistrict === district && routeRegion === region)?.[0];
   return route ? `school.html?r=${route}` : '';
 }
 
@@ -110,17 +102,17 @@ function renderDirectory(selectedRegion = '서울') {
   renderDistricts(selectedRegion);
 }
 
-function renderGangdongDirectory(displayName = '강동', district = '강동구') {
+function renderGangdongDirectory(displayName = '강동', district = '강동구', region = '서울') {
   document.title = `${displayName} 학교별 과외 | 스터디플러스`;
   document.querySelector('meta[name="description"]').setAttribute('content', `${displayName} 소재 초중고 학교별 시험 범위와 학습 흐름에 맞춘 1:1 과외 상담을 받아보세요.`);
-  const schools = regions.서울.districts[district];
+  const schools = regions[region].districts[district];
   const schoolGroups = [
     ['초등학교', '🎒', schools.filter((school) => getSchoolLevel(school) === '초등학교')],
     ['중학교', '📚', schools.filter((school) => getSchoolLevel(school) === '중학교')],
     ['고등학교', '🎓', schools.filter((school) => getSchoolLevel(school) === '고등학교')]
   ];
   const totalSchools = schoolGroups.reduce((total, [, , groupSchools]) => total + groupSchools.length, 0);
-  app.innerHTML = `<section class="gangdong-hero"><div class="section-wrap gangdong-hero-inner"><div><p class="eyebrow">SCHOOL-SPECIALIZED TUTORING · GANGDONG</p><h1><em>강동</em> 학교별 과외</h1><p>강동 소재 초·중·고 학교별 시험 범위와<br />학습 흐름에 맞춘 1:1 맞춤 과외 상담</p><div class="gangdong-actions"><a class="primary-button" href="index.html#apply">무료 상담 신청 <span>→</span></a><a class="back-link" href="school.html?a=서울">← 지역 선택</a></div></div><div class="gangdong-hero-stat"><strong>${totalSchools}<small>개</small></strong><span>강동 학교 데이터</span><i>학교별 내신 전담 선생님</i></div></div></section><section class="gangdong-directory section-wrap"><div class="directory-top"><div><p class="eyebrow">FIND YOUR SCHOOL</p><h2>강동 ${totalSchools}개 학교</h2></div><label class="school-search"><span>⌕</span><input id="gangdong-search" type="search" placeholder="학교 이름으로 검색" aria-label="강동 학교 이름 검색" /></label></div><div class="gangdong-school-groups">${schoolGroups.map(([level, icon, groupSchools]) => `<section class="gangdong-school-group"><div class="gangdong-group-heading"><span>${icon}</span><h3>${level}</h3><small>${groupSchools.length}개 학교</small></div><div class="gangdong-school-grid">${groupSchools.map((school) => `<a class="gangdong-school-card" data-school="${escapeHtml(school)}" href="${schoolLink('서울', district, school)}"><strong>${escapeHtml(school)}</strong><span>↗</span></a>`).join('')}</div></section>`).join('')}</div><p class="gangdong-empty" hidden>검색한 학교가 없습니다. 다른 학교 이름으로 찾아보세요.</p></section><section class="school-callout"><div class="section-wrap callout-inner"><div><p class="eyebrow">READY TO START?</p><h2>학교를 골라도 고민이 남는다면,<br /><em>무료 상담</em>으로 먼저 물어보세요.</h2></div><a class="primary-button" href="index.html#apply">맞춤 상담 신청하기 <span>→</span></a></div></section>`;
+  app.innerHTML = `<section class="gangdong-hero"><div class="section-wrap gangdong-hero-inner"><div><p class="eyebrow">SCHOOL-SPECIALIZED TUTORING · GANGDONG</p><h1><em>강동</em> 학교별 과외</h1><p>강동 소재 초·중·고 학교별 시험 범위와<br />학습 흐름에 맞춘 1:1 맞춤 과외 상담</p><div class="gangdong-actions"><a class="primary-button" href="index.html#apply">무료 상담 신청 <span>→</span></a><a class="back-link" href="school.html?a=${encodeURIComponent(region)}">← 지역 선택</a></div></div><div class="gangdong-hero-stat"><strong>${totalSchools}<small>개</small></strong><span>강동 학교 데이터</span><i>학교별 내신 전담 선생님</i></div></div></section><section class="gangdong-directory section-wrap"><div class="directory-top"><div><p class="eyebrow">FIND YOUR SCHOOL</p><h2>강동 ${totalSchools}개 학교</h2></div><label class="school-search"><span>⌕</span><input id="gangdong-search" type="search" placeholder="학교 이름으로 검색" aria-label="강동 학교 이름 검색" /></label></div><div class="gangdong-school-groups">${schoolGroups.map(([level, icon, groupSchools]) => `<section class="gangdong-school-group"><div class="gangdong-group-heading"><span>${icon}</span><h3>${level}</h3><small>${groupSchools.length}개 학교</small></div><div class="gangdong-school-grid">${groupSchools.map((school) => `<a class="gangdong-school-card" data-school="${escapeHtml(school)}" href="${schoolLink(region, district, school)}"><strong>${escapeHtml(school)}</strong><span>↗</span></a>`).join('')}</div></section>`).join('')}</div><p class="gangdong-empty" hidden>검색한 학교가 없습니다. 다른 학교 이름으로 찾아보세요.</p></section><section class="school-callout"><div class="section-wrap callout-inner"><div><p class="eyebrow">READY TO START?</p><h2>학교를 골라도 고민이 남는다면,<br /><em>무료 상담</em>으로 먼저 물어보세요.</h2></div><a class="primary-button" href="index.html#apply">맞춤 상담 신청하기 <span>→</span></a></div></section>`;
   document.querySelector('.gangdong-hero h1 em').textContent = displayName;
   document.querySelector('.gangdong-hero .eyebrow').textContent = `SCHOOL-SPECIALIZED TUTORING · ${displayName.toUpperCase()}`;
   document.querySelector('.gangdong-hero h1').lastChild.textContent = ' 학교별 과외';
@@ -189,7 +181,8 @@ const districtRoutes = {
   dobong: ['도봉', '도봉구'], gangbuk: ['강북', '강북구'], seongbuk: ['성북', '성북구'], dongdaemun: ['동대문', '동대문구'],
   jungnang: ['중랑', '중랑구'], gwangjin: ['광진', '광진구'], seongdong: ['성동', '성동구'], yongsan: ['용산', '용산구'],
   jongno: ['종로', '종로구'], seodaemun: ['서대문', '서대문구'], eunpyeong: ['은평', '은평구'], yangcheon: ['양천', '양천구'],
-  guro: ['구로', '구로구'], geumcheon: ['금천', '금천구'], gwanak: ['관악', '관악구'], dongjak: ['동작', '동작구']
+  guro: ['구로', '구로구'], geumcheon: ['금천', '금천구'], gwanak: ['관악', '관악구'], dongjak: ['동작', '동작구'],
+  ...window.gyeonggiDistrictRoutes
 };
 const selectedDistrict = districtRoutes[new URLSearchParams(window.location.search).get('r')];
 if (selectedSchoolData) renderDetail(selectedSchoolData); else if (selectedDistrict) renderGangdongDirectory(...selectedDistrict); else renderDirectory(regions[selectedRegion] ? selectedRegion : '서울');
