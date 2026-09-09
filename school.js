@@ -14,17 +14,17 @@ const regions = {
       성북구: ['광운초', '대광초', '매원초', '개운초', '길음초', '돈암초', '동신초', '미아초', '삼선초', '석관초', '성북초', '숭곡초', '숭덕초', '숭례초', '숭인초', '안암초', '월곡초', '일신초', '장곡초', '장위초', '정덕초', '정릉초', '정수초', '청덕초', '성신초', '우촌초', '석계초', '길원초', '장월초', '대학교사범대학부설중', '고려대학교사범대학부속중', '고명중', '남대문중', '동구여자중', '북악중', '삼선중', '석관중', '성신여자중', '용문중', '월곡중', '장위중', '종암중', '한성여자중', '홍익대학교사범대학부속중', '개운중', '길음중', '숭곡중', '대학교사범대학부설고', '경동고', '계성고', '고려대학교사범대학부속고', '석관고', '성신여자고', '용문고', '한성여자고', '홍익대학교사범대학부속고', '대일외국어고', '도시과학기술고', '동구고', '고명외식고'],
       동대문구: ['경희초', '삼육초', '군자초', '답십리초', '동답초', '배봉초', '신답초', '안평초', '용두초', '이문초', '장평초', '전곡초', '전농초', '전동초', '종암초', '청량초', '홍릉초', '홍파초', '휘경초', '은석초', '휘봉초', '경희여자중', '경희중', '대광중', '동국대학교사범대학부속중', '동대문중', '성일중', '숭인중', '장평중', '전농중', '전동중', '전일중', '정화여자중', '청량중', '휘경여자중', '휘경중', '경희고', '경희여자고', '대광고', '동국대학교사범대학부속고', '청량고', '휘경여자고', '반도체고', '정화고', '해성국제컨벤션고', '해성여자고', '휘봉고'],
       중랑구: ['금성초', '동원초', '망우초', '면남초', '면동초', '면목초', '면북초', '면일초', '묵동초', '봉화초', '상봉초', '신내초', '신묵초', '신현초', '원묵초', '중곡초', '중랑초', '중목초', '중화초', '중흥초', '묵현초', '새솔초', '양원숲초', '동원중', '면목중', '봉화중', '상봉중', '송곡중', '신현중', '영란여자중', '용마중', '원묵중', '장안중', '중랑중', '중화중', '태릉중', '혜원여자중', '면목고', '송곡고', '송곡여자고', '중화고', '태릉고', '혜원여자고', '송곡관광고', '이화여자대학교병설미디어고', '신현고', '원묵고'],
-      광진구: ['건대부고', '대원고', '광남고', '자양중'],
-      성동구: ['한양대사대부고', '무학여고', '경일고', '성수중'],
-      용산구: ['용산고', '중경고', '신광여고', '후암중'],
-      종로구: ['경복고', '중앙고', '덕성여고', '서울사대부중'],
-      서대문구: ['연세대사대부고', '인창고', '이화여고', '연희중'],
-      은평구: ['대성고', '숭실고', '예일여고', '불광중'],
-      양천구: ['서울목동초등학교', '목동고', '양정고', '진명여고', '목동중'],
-      구로구: ['구일고', '신도림고', '경인고', '구로중'],
-      금천구: ['독산고', '문일고', '금천고', '시흥중'],
-      관악구: ['서울문영여고', '삼성고', '봉천고', '관악중'],
-      동작구: ['숭실고', '경문고', '수도여고', '동작중']
+      광진구: ['경복초', '광남초', '광장초', '구남초', '구의초', '동의초', '동자초', '성자초', '신양초', '신자초', '양남초', '용곡초', '용마초', '자양초', '장안초', '중광초', '중마초', '성동초', '세종초', '광진초', '양진초', '건국대학교사범대학부속중', '광남중', '광양중', '광장중', '광진중', '구의중', '대원국제중', '동국대학교사범대학부속가람중', '신양중', '용곡중', '자양중', '양진중', '건국대학교사범대학부속고', '광남고', '광양고', '대원고', '대원여자고', '동국대학교사범대학부속가람고', '자양고', '대원외국어고', '선화예술고'],
+      성동구: ['경동초', '경수초', '경일초', '금북초', '금옥초', '금호초', '동명초', '무학초', '사근초', '성수초', '옥수초', '옥정초', '용답초', '응봉초', '행당초', '한양초', '숭신초', '마장초', '행현초', '송원초', '동호초', '경수중', '광희중', '동마중', '무학중', '성수중', '성원중', '옥정중', '한양대학교사범대학부속중', '행당중', '경일중', '마장중', '무학여자고', '한양대학교사범대학부속고', '방송고', '경일고', '성수고', '금호고', '도선고'],
+      용산구: ['금양초', '남정초', '보광초', '삼광초', '서빙고초', '신용산초', '용산초', '용암초', '원효초', '이태원초', '청파초', '한강초', '한남초', '후암초', '신광초', '배문중', '보성여자중', '선린중', '성심여자중', '신광여자중', '오산중', '용강중', '용산중', '한강중', '배문고', '보성여자고', '성심여자고', '신광여자고', '오산고', '용산고', '중경고', '디지텍고', '용산철도고', '선린인터넷고'],
+      종로구: ['대학교사범대학부설초', '상명대학교사범대학부속초', '교동초', '독립문초', '매동초', '명신초', '세검정초', '재동초', '창신초', '청운초', '혜화초', '효제초', '운현초', '대학교사범대학부설여자중', '경신중', '대신중', '덕성여자중', '동성중', '배화여자중', '상명대학교사범대학부속여자중', '중앙중', '청운중', '경복고', '경신고', '대신고', '덕성여자고', '동성고', '배화여자고', '상명대학교사범대학부속여자고', '중앙고', '과학고', '상업고', '예술고', '대동세무고', '서일문화예술고', '국제고'],
+      서대문구: ['경기초', '명지초', '고은초', '금화초', '대신초', '미동초', '북가좌초', '북성초', '안산초', '연가초', '연희초', '인왕초', '창서초', '홍연초', '홍은초', '홍제초', '이화여자대학교사범대학부속초', '추계초', '가재울초', '동명여자중', '명지중', '서연중', '신연중', '연북중', '연희중', '이화여자대학교사범대학부속이화금란중', '인창중', '정원여자중', '중앙여자중', '한성중', '홍은중', '인왕중', '가재울중', '명지고', '이화여자대학교사범대학부속이화금란고', '인창고', '중앙여자고', '한성고', '한성과학고', '가재울고'],
+      은평구: ['갈현초', '구산초', '녹번초', '대은초', '대조초', '북한산초', '불광초', '상신초', '수색초', '신도초', '신사초', '역촌초', '연신초', '연은초', '연천초', '은평초', '응암초', '증산초', '선일초', '예일초', '충암초', '연광초', '서신초', '은명초', '진관초', '은빛초', '수리초', '구현초', '은진초', '어울초', '구산중', '대성중', '덕산중', '불광중', '상신중', '선일여자중', '선정중', '숭실중', '연서중', '연신중', '연천중', '영락중', '예일여자중', '은평중', '증산중', '충암중', '진관중', '신도중', '대성고', '동명여자고', '선일여자고', '선정고', '숭실고', '예일여자고', '은평메디텍고', '충암고', '신진과학기술고', '선일빅데이터고', '선정국제관광고', '예일디자인고', '동명생활경영고', '세명컴퓨터고', '진관고', '신도고', '은평고', '하나고'],
+      양천구: ['갈산초', '강서초', '강신초', '강월초', '경인초', '계남초', '남명초', '목동초', '목원초', '서정초', '신강초', '신남초', '신목초', '신서초', '신원초', '양강초', '양동초', '양명초', '양목초', '양원초', '양화초', '영도초', '월촌초', '은정초', '정목초', '지향초', '신기초', '장수초', '목운초', '신은초', '강신중', '금옥중', '목동중', '목일중', '봉영여자중', '신남중', '신목중', '신서중', '신원중', '신월중', '양강중', '양동중', '양서중', '양정중', '양천중', '영도중', '월촌중', '목운중', '강서고', '광영고', '광영여자고', '금옥여자고', '백암고', '신목고', '양정고', '양천고', '목동고', '영상고', '진명여자고', '한가람고', '대일관광고', '금융고', '신서고'],
+      구로구: ['개명초', '개봉초', '개웅초', '고산초', '고척초', '구로남초', '구로초', '구일초', '덕의초', '동구로초', '매봉초', '미래초', '세곡초', '신구로초', '신도림초', '신미림초', '영서초', '영일초', '오류남초', '오류초', '오정초', '온수초', '고원초', '천왕초', '하늘숲초', '항동초', '개봉중', '개웅중', '고척중', '구로중', '구일중', '신도림중', '영림중', '영서중', '오남중', '경인중', '오류중', '우신중', '천왕중', '항동중', '경인고', '고척고', '구로고', '구일고', '오류고', '우신고', '덕일전자공업고', '유한공업고', '예림디자인고', '서서울생활과학고', '과학고', '구현고', '신도림고', '공연예술고'],
+      금천구: ['동광초', '가산초', '금산초', '금천초', '독산초', '두산초', '문교초', '문백초', '문성초', '백산초', '시흥초', '신흥초', '안천초', '영남초', '정심초', '탑동초', '금동초', '금나래초', '가산중', '난곡중', '동일중', '문성중', '문일중', '세일중', '시흥중', '안천중', '한울중', '국립전통예술고', '금천고', '독산고', '동일여자고', '매그넷고', '문일고'],
+      관악구: ['관악초', '구암초', '난곡초', '난우초', '난향초', '남부초', '당곡초', '미성초', '봉천초', '사당초', '삼성초', '신림초', '신봉초', '신성초', '신우초', '원당초', '원신초', '은천초', '인헌초', '청룡초', '봉현초', '조원초', '관악중', '광신중', '난우중', '남강중', '남서울중', '당곡중', '미성중', '봉림중', '봉원중', '문영여자중', '성보중', '신관중', '삼성중', '신림중', '인헌중', '구암중', '광신고', '남강고', '당곡고', '문영여자고', '미림여자고', '삼성고', '미술고', '성보고', '신림고', '영락고', '인헌고', '여자상업고', '영락의료과학고', '관광고', '광신방송예술고', '미림마이스터고', '구암고'],
+      동작구: ['강남초', '남사초', '남성초', '노량진초', '대림초', '동작초', '문창초', '본동초', '상도초', '신길초', '신남성초', '신상도초', '영본초', '영화초', '은로초', '행림초', '흑석초', '중앙대학교사범대학부속초', '보라매초', '삼일초', '상현초', '강남중', '강현중', '국사봉중', '남성중', '대방중', '동양중', '동작중', '문창중', '사당중', '상도중', '상현중', '성남중', '영등포중', '장승중', '중앙대학교사범대학부속중', '숭의여자중', '경문고', '동작고', '성남고', '수도여자고', '숭의여자고', '영등포고', '공업고']
     }
   },
   경기도: {
@@ -83,6 +83,12 @@ function findSchool(value) {
 
 function schoolLink(region, district, school) {
   return `school.html?school=${slugify(region, district, school)}`;
+}
+
+function districtLink(region, district) {
+  if (region !== '서울') return '';
+  const route = Object.entries(districtRoutes).find(([, [, routeDistrict]]) => routeDistrict === district)?.[0];
+  return route ? `school.html?r=${route}` : '';
 }
 
 function renderDirectory(selectedRegion = '서울') {
@@ -148,8 +154,8 @@ function renderDistricts(regionName, query = '') {
     return;
   }
   if (!activeDistrict && !normalizedQuery) {
-    content.innerHTML = `<div class="directory-region-heading"><h2>${escapeHtml(regionName)} <em>지역</em></h2><span>${districts.length}개 시군구</span></div><div class="district-grid">${districts.map(([district, schools]) => `<button class="district-card" data-district="${escapeHtml(district)}"><strong>${escapeHtml(district.replace(/시$/, ''))}</strong><span>${districtCounts[regionName]?.[district] || schools.length}개</span><b>›</b></button>`).join('')}</div>`;
-    document.querySelectorAll('.district-card').forEach((button) => button.addEventListener('click', () => {
+    content.innerHTML = `<div class="directory-region-heading"><h2>${escapeHtml(regionName)} <em>지역</em></h2><span>${districts.length}개 시군구</span></div><div class="district-grid">${districts.map(([district, schools]) => { const href = districtLink(regionName, district); const cardContent = `<strong>${escapeHtml(district.replace(/시$/, ''))}</strong><span>${districtCounts[regionName]?.[district] || schools.length}개</span><b>›</b>`; return href ? `<a class="district-card" href="${href}">${cardContent}</a>` : `<button class="district-card" data-district="${escapeHtml(district)}">${cardContent}</button>`; }).join('')}</div>`;
+    document.querySelectorAll('button.district-card').forEach((button) => button.addEventListener('click', () => {
       activeDistrict = button.dataset.district;
       renderDistricts(regionName);
     }));
@@ -177,16 +183,15 @@ function renderDetail(schoolData) {
 const selectedSchool = new URLSearchParams(window.location.search).get('school');
 const selectedSchoolData = findSchool(selectedSchool);
 const selectedRegion = new URLSearchParams(window.location.search).get('a');
-const isGangdongPage = new URLSearchParams(window.location.search).get('r') === 'gangdong';
-const isMapoPage = new URLSearchParams(window.location.search).get('r') === 'mapo';
-const isGangseoPage = new URLSearchParams(window.location.search).get('r') === 'gangseo';
-const isYeongdeungpoPage = new URLSearchParams(window.location.search).get('r') === 'yeongdeungpo';
-const isNowonPage = new URLSearchParams(window.location.search).get('r') === 'nowon';
-const isDobongPage = new URLSearchParams(window.location.search).get('r') === 'dobong';
-const isGangbukPage = new URLSearchParams(window.location.search).get('r') === 'gangbuk';
-const isSeongbukPage = new URLSearchParams(window.location.search).get('r') === 'seongbuk';
-const isDongdaemunPage = new URLSearchParams(window.location.search).get('r') === 'dongdaemun';
-const isJungnangPage = new URLSearchParams(window.location.search).get('r') === 'jungnang';
-if (selectedSchoolData) renderDetail(selectedSchoolData); else if (isGangdongPage) renderGangdongDirectory(); else if (isMapoPage) renderGangdongDirectory('마포', '마포구'); else if (isGangseoPage) renderGangdongDirectory('강서', '강서구'); else if (isYeongdeungpoPage) renderGangdongDirectory('영등포', '영등포구'); else if (isNowonPage) renderGangdongDirectory('노원', '노원구'); else if (isDobongPage) renderGangdongDirectory('도봉', '도봉구'); else if (isGangbukPage) renderGangdongDirectory('강북', '강북구'); else if (isSeongbukPage) renderGangdongDirectory('성북', '성북구'); else if (isDongdaemunPage) renderGangdongDirectory('동대문', '동대문구'); else if (isJungnangPage) renderGangdongDirectory('중랑', '중랑구'); else renderDirectory(regions[selectedRegion] ? selectedRegion : '서울');
+const districtRoutes = {
+  gangnam: ['강남', '강남구'], seocho: ['서초', '서초구'], songpa: ['송파', '송파구'], gangdong: ['강동', '강동구'],
+  mapo: ['마포', '마포구'], gangseo: ['강서', '강서구'], yeongdeungpo: ['영등포', '영등포구'], nowon: ['노원', '노원구'],
+  dobong: ['도봉', '도봉구'], gangbuk: ['강북', '강북구'], seongbuk: ['성북', '성북구'], dongdaemun: ['동대문', '동대문구'],
+  jungnang: ['중랑', '중랑구'], gwangjin: ['광진', '광진구'], seongdong: ['성동', '성동구'], yongsan: ['용산', '용산구'],
+  jongno: ['종로', '종로구'], seodaemun: ['서대문', '서대문구'], eunpyeong: ['은평', '은평구'], yangcheon: ['양천', '양천구'],
+  guro: ['구로', '구로구'], geumcheon: ['금천', '금천구'], gwanak: ['관악', '관악구'], dongjak: ['동작', '동작구']
+};
+const selectedDistrict = districtRoutes[new URLSearchParams(window.location.search).get('r')];
+if (selectedSchoolData) renderDetail(selectedSchoolData); else if (selectedDistrict) renderGangdongDirectory(...selectedDistrict); else renderDirectory(regions[selectedRegion] ? selectedRegion : '서울');
 
 document.querySelector('.menu-button').addEventListener('click', () => document.querySelector('.nav-links').classList.toggle('mobile-open'));
