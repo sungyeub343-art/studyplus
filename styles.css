@@ -18,6 +18,9 @@
 .academy-landing-image{max-width:816px;padding-top:70px;padding-bottom:20px}
 .academy-landing-image img{display:block;width:100%;height:auto}
 @media(max-width:800px){.academy-landing-image{padding:44px 0 0}}
+.school-landing-image.section-wrap{max-width:856px;padding-top:70px;padding-bottom:20px}
+.school-landing-image img{display:block;width:100%;height:auto}
+@media(max-width:800px){.school-page .school-landing-image{padding:44px 0 0}.school-page .detail-content{display:block}.school-page .detail-aside{margin-top:45px}}
 
 /* ===== School directory & detail base layout ===== */
 .school-hero{display:flex;align-items:center;justify-content:space-between;gap:60px;padding-top:72px;padding-bottom:72px}
