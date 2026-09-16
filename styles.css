@@ -15,6 +15,10 @@
 .school-page .school-hero h1,.school-page .directory-top h2,.school-page .directory-region-heading h2,.school-page .school-list-heading h2{color:#f46b5f}.school-page .school-hero h1 em,.school-page .directory-region-heading h2 em,.school-page .school-list-heading h2 em{color:#17243d}.school-page .region-tab.active,.school-page .region-tab:hover{border-color:#f46b5f;background:#f46b5f}.school-page .region-tab{color:#17243d}.school-page .school-search:focus-within{border-color:#f46b5f;box-shadow:0 0 0 3px #f46b5f18}.school-page .level-tab.active,.school-page .level-tab:hover{border-color:#f46b5f;background:#f46b5f}.school-page .district-card{border-color:#f3a08f}.school-page .district-card:hover{border-color:#f46b5f;background:#fff7f4;box-shadow:0 10px 22px #f46b5f18}.school-page .district-card span,.school-page .district-card b,.school-page .back-districts{color:#f46b5f}.school-page .district-heading span{color:#f46b5f}.school-page .school-card:hover{border-color:#f46b5f;background:#fff7f4;transform:translateY(-2px);box-shadow:0 8px 18px #f46b5f18}.school-page .school-card-arrow{color:#f46b5f}
 .school-page .region-tabs{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.school-page .region-tab{appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 20px;border:1px solid #d9dee4;border-radius:999px;background:#fff;color:#17243d;font-size:14px;font-weight:700;line-height:1;white-space:nowrap;box-shadow:none}.school-page .region-tab.active{color:#fff;border-color:#f46b5f;background:#f46b5f}.school-page .region-tab:focus-visible{outline:3px solid #f46b5f55;outline-offset:2px}
 
+.academy-landing-image{max-width:816px;padding-top:70px;padding-bottom:20px}
+.academy-landing-image img{display:block;width:100%;height:auto}
+@media(max-width:800px){.academy-landing-image{padding:44px 0 0}}
+
 /* ===== School directory & detail base layout ===== */
 .school-hero{display:flex;align-items:center;justify-content:space-between;gap:60px;padding-top:72px;padding-bottom:72px}
 .school-hero-copy{max-width:620px}
