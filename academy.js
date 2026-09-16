@@ -7,6 +7,14 @@ const centerLink = (center) => `academy.html?center=${encodeURIComponent(centerK
 const schoolList = (value) => String(value || '').split(/,|\.|\s{2,}/).map((school) => school.trim()).filter(Boolean);
 const allSchools = (center) => [...schoolList(center.elem), ...schoolList(center.mid), ...schoolList(center.high)];
 const consultationPhone = '010-2928-3614';
+const setPageMetadata = (title, description, canonicalUrl) => {
+  document.title = title;
+  document.querySelector('meta[name="description"]').setAttribute('content', description);
+  document.querySelector('link[rel="canonical"]').setAttribute('href', canonicalUrl);
+  document.querySelector('meta[property="og:title"]').setAttribute('content', title);
+  document.querySelector('meta[property="og:description"]').setAttribute('content', description);
+  document.querySelector('meta[property="og:url"]').setAttribute('content', canonicalUrl);
+};
 
 function findCenter(value) {
   if (!value) return null;
@@ -53,8 +61,9 @@ function renderDetail(center) {
     ['고등학교', center.high]
   ].filter(([, value]) => schoolList(value).length);
   const schoolCount = schools.reduce((total, [, value]) => total + schoolList(value).length, 0);
-  document.title = `${center.name} 와와학습코칭센터 학원 수업 | 상상코칭`;
-  document.querySelector('meta[name="description"]').setAttribute('content', `${center.name} 학원 수업과 학습코칭 상담. ${center.addr} 인근 초중고 학생을 위한 맞춤 학습을 확인하세요.`);
+  const title = `${center.name} 와와학습코칭센터 학원 수업 | 상상코칭`;
+  const description = `${center.name} 학원 수업과 학습코칭 상담. ${center.addr} 인근 초중고 학생을 위한 맞춤 학습을 확인하세요.`;
+  setPageMetadata(title, description, `https://studyplus.kr/${centerLink(center)}`);
   app.innerHTML = `<section class="academy-detail-hero"><div class="section-wrap"><a class="back-link" href="academy.html">← 전국 센터 목록</a><div class="breadcrumb">학원 수업 <span>/</span> ${escapeHtml(center.region)} <span>/</span> ${escapeHtml(center.name)}</div><div class="detail-label"><span>✓ 지역별 학습코칭</span><small>${schoolCount}개 주변 학교 · 초중고 맞춤 수업</small></div><h1><em>${escapeHtml(center.name)}</em><br />와와학습코칭센터 학원 수업</h1><p>${escapeHtml(center.addr)}<br />학생의 현재 학습 상태에 맞춘 코칭 수업을 시작합니다.</p><div class="academy-detail-actions"><a class="primary-button" href="index.html#apply">${escapeHtml(center.name)} 상담 신청 <span>→</span></a><a class="outline-button" href="tel:${consultationPhone.replace(/[^0-9]/g, '')}">전화 상담 ${consultationPhone}</a></div></div></section>
   <section class="detail-facts section-wrap"><div><span>센터명</span><strong>${escapeHtml(center.name)}</strong></div><div><span>지역</span><strong>${escapeHtml(center.region)} · ${escapeHtml(center.dong)}</strong></div><div><span>주변 학교</span><strong>${schoolCount}개 학교</strong></div><div><span>상담 전화</span><strong>${consultationPhone}</strong></div></section>
   <section class="academy-landing-image section-wrap"><img src="wawa-learning-coaching.jpg" alt="와와학습코칭센터 맞춤 학습코칭, 과목, 수업료, 상담 방법 및 학생 후기 안내" loading="lazy" decoding="async" /></section>

@@ -66,6 +66,14 @@ const districtCounts = {
 const escapeHtml = (value) => String(value).replace(/[&<>'"]/g, (character) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' })[character]);
 const slugify = (region, district, school) => encodeURIComponent(`${region}|${district}|${school}`);
 const getSchoolName = (school) => String(school).split('|||')[0];
+const setPageMetadata = (title, description, canonicalUrl) => {
+  document.title = title;
+  document.querySelector('meta[name="description"]').setAttribute('content', description);
+  document.querySelector('link[rel="canonical"]').setAttribute('href', canonicalUrl);
+  document.querySelector('meta[property="og:title"]').setAttribute('content', title);
+  document.querySelector('meta[property="og:description"]').setAttribute('content', description);
+  document.querySelector('meta[property="og:url"]').setAttribute('content', canonicalUrl);
+};
 const getSchoolLevel = (school) => {
   const schoolName = getSchoolName(school);
   return schoolMeta[schoolName]?.level || (schoolName.includes('초등학교') || schoolName.endsWith('초') ? '초등학교' : schoolName.includes('중학교') || schoolName.endsWith('중') ? '중학교' : '고등학교');
@@ -109,8 +117,9 @@ function renderDirectory(selectedRegion = '서울') {
 }
 
 function renderGangdongDirectory(displayName = '강동', district = '강동구', region = '서울') {
-  document.title = `${displayName} 학교별 과외 | 상상코칭`;
-  document.querySelector('meta[name="description"]').setAttribute('content', `${displayName} 소재 초중고 학교별 시험 범위와 학습 흐름에 맞춘 1:1 과외 상담을 받아보세요.`);
+  const description = `${displayName} 소재 초중고 학교별 시험 범위와 학습 흐름에 맞춘 1:1 과외 상담을 받아보세요.`;
+  const route = new URLSearchParams(window.location.search).get('r');
+  setPageMetadata(`${displayName} 초중고 학교별 내신 과외 | 상상코칭`, description, `https://studyplus.kr/school.html?r=${encodeURIComponent(route)}`);
   const schools = regions[region].districts[district];
   const schoolGroups = [
     ['초등학교', '🎒', schools.filter((school) => getSchoolLevel(school) === '초등학교')],
@@ -180,8 +189,10 @@ function renderDetail(schoolData, selectedSubject) {
   const detailHeading = isMath ? `${escapeHtml(school)} 수학 내신에<br /><em>맞춰야 하는 이유</em>` : `${escapeHtml(school)} 내신에<br /><em>맞춰야 하는 이유</em>`;
   const detailLead = isMath ? `${escapeHtml(school)}의 수학 진도와 시험 범위, 서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다. 개념의 빈틈부터 고난도 문제까지 단계별로 연결합니다.` : `같은 학년이어도 학교마다 진도, 교과서, 서술형의 기준이 다릅니다. ${escapeHtml(school)}의 시험 범위와 자주 나오는 유형을 기준으로 학습 계획을 세우고, 학생의 약점은 기초부터 다시 연결합니다.`;
   const detailPoints = isMath ? '<article><span>01</span><h3>수학 실력 진단</h3><p>최근 시험과 오답을 분석해 연산, 개념, 응용 중 먼저 보완할 영역을 찾습니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>진도와 출제 유형에 맞춰 서술형, 고난도, 시간 관리 문제를 단계별로 연습합니다.</p></article><article><span>03</span><h3>오답 반복 관리</h3><p>틀린 이유를 기록하고 유사 문제로 다시 확인해 같은 실수를 줄입니다.</p></article>' : '<article><span>01</span><h3>시험 범위 진단</h3><p>이번 시험의 범위와 지난 시험 오답을 함께 확인해 꼭 필요한 단원부터 시작합니다.</p></article><article><span>02</span><h3>학교 맞춤 풀이</h3><p>학교의 문제 스타일에 맞춰 서술형, 고난도, 시간 관리까지 단계별로 연습합니다.</p></article><article><span>03</span><h3>수업 후 관리</h3><p>수업 기록과 복습 루틴을 남겨 혼자 공부하는 시간까지 이어지도록 돕습니다.</p></article>';
-  document.title = `${region} ${district} ${pageName} | 상상코칭`;
-  document.querySelector('meta[name="description"]').setAttribute('content', isMath ? `${school} 학생을 위한 ${meta.level} 수학과외. 학교별 시험 범위와 수학 출제 유형에 맞춘 1:1 수업을 상상코칭에서 상담받아보세요.` : `${school} 학생을 위한 ${meta.level} 학교별 내신 과외. 시험 범위와 출제 경향에 맞춘 1:1 맞춤 수업을 상상코칭에서 상담받아보세요.`);
+  const description = isMath ? `${school} 학생을 위한 ${meta.level} 수학과외. 학교별 시험 범위와 수학 출제 유형에 맞춘 1:1 수업을 상상코칭에서 상담받아보세요.` : `${school} 학생을 위한 ${meta.level} 학교별 내신 과외. 시험 범위와 출제 경향에 맞춘 1:1 맞춤 수업을 상상코칭에서 상담받아보세요.`;
+  const canonicalUrl = new URL(schoolLink(region, district, schoolKey), 'https://studyplus.kr/');
+  if (isMath) canonicalUrl.searchParams.set('subject', 'math');
+  setPageMetadata(`${region} ${district} ${pageName} | 상상코칭`, description, canonicalUrl.href);
   app.innerHTML = `<section class="school-detail-hero section-wrap"><a class="back-link" href="${isMath ? schoolLink(region, district, schoolKey) : 'school.html'}">← ${isMath ? `${escapeHtml(school)} 과외` : '학교 목록으로'}</a><div class="breadcrumb">학교별 과외 <span>/</span> ${escapeHtml(district)} <span>/</span> ${escapeHtml(school)}${isMath ? ' <span>/</span> 수학' : ''}</div><div class="detail-label"><span>✓ ${isMath ? '수학 내신 분석 완료' : '학교별 분석 완료'}</span><small>${escapeHtml(meta.level)} · ${isMath ? '수학 1:1 전담' : escapeHtml(meta.tag)}</small></div><h1>${escapeHtml(district)} <em>${escapeHtml(school)}</em> ${isMath ? '수학과외' : '과외'}</h1><p>${isMath ? '학교 수학 시험의 진도와 출제 유형을 분석해,<br />개념부터 고난도까지 이어지는 1:1 수업을 시작합니다.' : '학교 시험의 흐름을 읽고, 학생의 현재 위치에서<br />다음 등급까지 이어지는 1:1 전담 수업을 시작합니다.'}</p><div class="school-detail-actions"><a class="primary-button" href="index.html#apply">${escapeHtml(school)} ${isMath ? '수학 ' : ''}맞춤 상담 신청 <span>→</span></a><a class="outline-button" href="tel:01029283614">전화 상담 010-2928-3614</a></div></section><section class="detail-facts section-wrap"><div><span>학교</span><strong>${escapeHtml(school)}</strong></div><div><span>지역</span><strong>${escapeHtml(region)} ${escapeHtml(district)}</strong></div><div><span>대상</span><strong>${escapeHtml(meta.level)} 재학생</strong></div><div><span>과목</span><strong>${isMath ? '수학' : escapeHtml(meta.subjects)}</strong></div></section><section class="school-landing-image section-wrap"><img src="tutoring-landing-page.jpg" alt="초중고 전과목 1대1 맞춤 과외, 학습 과정, 후기 및 무료 상담 안내" loading="lazy" decoding="async" /></section><section class="detail-content section-wrap"><div class="detail-main"><p class="eyebrow">${isMath ? 'SCHOOL MATH TUTORING' : 'WHY SCHOOL-SPECIALIZED'}</p><h2>${detailHeading}</h2><p class="detail-lead">${detailLead}</p><div class="detail-points">${detailPoints}</div></div><aside class="detail-aside"><p class="eyebrow">SUBJECTS</p><h3>과목별 전담 수업</h3><ul>${subjectList}</ul><a href="index.html#apply" class="outline-button">${isMath ? '수학 선생님 추천받기' : '선생님 추천받기'} <span>↗</span></a></aside></section><section class="detail-source"><div class="section-wrap"><span>학교 정보 기준</span><p>학교명과 학교급은 학교알리미 전국학교현황 공개 목록을 참고했습니다. 주소, 학생 수, 설립 구분 등 최신 공시 정보는 원문에서 확인해 주세요.</p><a href="${schoolInfoUrl}" target="_blank" rel="noreferrer">학교알리미 전국학교현황 확인 <span>↗</span></a></div></section><section class="detail-bottom"><div class="section-wrap"><p class="eyebrow">A BETTER START</p><h2>지금 ${escapeHtml(school)}<br /><em>${isMath ? '수학 전담 선생님' : '전담 선생님'}</em>을 만나보세요.</h2><p>무료 체험 수업 후 아이와 맞는지 천천히 결정할 수 있습니다.</p><a class="primary-button" href="index.html#apply">무료 상담 신청 <span>→</span></a></div></section>`;
 }
 
