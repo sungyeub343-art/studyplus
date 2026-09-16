@@ -20,7 +20,7 @@
 @media(max-width:800px){.academy-landing-image{padding:44px 0 0}}
 .school-landing-image.section-wrap{max-width:856px;padding-top:70px;padding-bottom:20px}
 .school-landing-image img{display:block;width:100%;height:auto}
-@media(max-width:800px){.school-page .school-landing-image{padding:44px 0 0}.school-page .detail-content{display:block}.school-page .detail-aside{margin-top:45px}}
+@media(max-width:800px){.school-page .school-landing-image{padding:44px 0 0}.school-page .detail-content{display:block}.school-page .detail-points{grid-template-columns:1fr}.school-page .detail-aside{margin-top:45px}}
 
 /* ===== School directory & detail base layout ===== */
 .school-hero{display:flex;align-items:center;justify-content:space-between;gap:60px;padding-top:72px;padding-bottom:72px}
@@ -84,6 +84,7 @@
 .detail-aside li{display:flex;align-items:center;justify-content:space-between;padding:13px 4px;border-bottom:1px solid #edf0f2;font-size:13px;color:#17243d;font-weight:600}
 .detail-aside li:last-child{border-bottom:0}
 .detail-aside li b{color:#f46b5f;font-weight:700}
+.detail-aside .subject-link{display:flex;align-items:center;justify-content:space-between;width:100%;margin:-13px -4px;padding:13px 4px}.detail-aside .subject-link:hover,.detail-aside .subject-link.active{color:#f46b5f}
 
 .empty-result,.gangdong-empty{margin-top:30px;color:#98a1ae;font-size:13px;text-align:center}
 
