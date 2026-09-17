@@ -183,17 +183,40 @@ function renderDistricts(regionName, query = '') {
 function renderDetail(schoolData, selectedSubject) {
   const { region, district, school, schoolKey, meta } = schoolData;
   const isMath = selectedSubject === 'math';
+  const isEnglish = selectedSubject === 'english';
   const mathLink = `${schoolLink(region, district, schoolKey)}&subject=math`;
-  const pageName = `${school}${isMath ? ' 수학과외' : ' 과외'}`;
-  const subjectList = meta.subjects.split(' · ').map((subject) => subject === '수학' ? `<li><a class="subject-link${isMath ? ' active' : ''}" href="${mathLink}"${isMath ? ' aria-current="page"' : ''}><span>${subject}</span><b>→</b></a></li>` : `<li><span>${subject}</span><b>→</b></li>`).join('');
+  const englishLink = `${schoolLink(region, district, schoolKey)}&subject=english`;
+  const pageName = `${school}${isMath ? ' 수학과외' : isEnglish ? ' 영어과외' : ' 과외'}`;
+  const subjectList = meta.subjects.split(' · ').map((subject) => {
+    const subjectPage = subject === '수학' ? { href: mathLink, active: isMath } : subject === '영어' ? { href: englishLink, active: isEnglish } : null;
+    return subjectPage ? `<li><a class="subject-link${subjectPage.active ? ' active' : ''}" href="${subjectPage.href}"${subjectPage.active ? ' aria-current="page"' : ''}><span>${subject}</span><b>→</b></a></li>` : `<li><span>${subject}</span><b>→</b></li>`;
+  }).join('');
   const detailHeading = isMath ? `${escapeHtml(school)} 수학 내신에<br /><em>맞춰야 하는 이유</em>` : `${escapeHtml(school)} 내신에<br /><em>맞춰야 하는 이유</em>`;
   const detailLead = isMath ? `${escapeHtml(school)}의 수학 진도와 시험 범위, 서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다. 개념의 빈틈부터 고난도 문제까지 단계별로 연결합니다.` : `같은 학년이어도 학교마다 진도, 교과서, 서술형의 기준이 다릅니다. ${escapeHtml(school)}의 시험 범위와 자주 나오는 유형을 기준으로 학습 계획을 세우고, 학생의 약점은 기초부터 다시 연결합니다.`;
   const detailPoints = isMath ? '<article><span>01</span><h3>수학 실력 진단</h3><p>최근 시험과 오답을 분석해 연산, 개념, 응용 중 먼저 보완할 영역을 찾습니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>진도와 출제 유형에 맞춰 서술형, 고난도, 시간 관리 문제를 단계별로 연습합니다.</p></article><article><span>03</span><h3>오답 반복 관리</h3><p>틀린 이유를 기록하고 유사 문제로 다시 확인해 같은 실수를 줄입니다.</p></article>' : '<article><span>01</span><h3>시험 범위 진단</h3><p>이번 시험의 범위와 지난 시험 오답을 함께 확인해 꼭 필요한 단원부터 시작합니다.</p></article><article><span>02</span><h3>학교 맞춤 풀이</h3><p>학교의 문제 스타일에 맞춰 서술형, 고난도, 시간 관리까지 단계별로 연습합니다.</p></article><article><span>03</span><h3>수업 후 관리</h3><p>수업 기록과 복습 루틴을 남겨 혼자 공부하는 시간까지 이어지도록 돕습니다.</p></article>';
-  const description = isMath ? `${school} 학생을 위한 ${meta.level} 수학과외. 학교별 시험 범위와 수학 출제 유형에 맞춘 1:1 수업을 상상코칭에서 상담받아보세요.` : `${school} 학생을 위한 ${meta.level} 학교별 내신 과외. 시험 범위와 출제 경향에 맞춘 1:1 맞춤 수업을 상상코칭에서 상담받아보세요.`;
+  const description = isMath ? `${school} 학생을 위한 ${meta.level} 수학과외. 학교별 시험 범위와 수학 출제 유형에 맞춘 1:1 수업을 상상코칭에서 상담받아보세요.` : isEnglish ? `${school} 학생을 위한 ${meta.level} 영어과외. 학교별 영어 시험 범위와 어휘, 문법, 독해 출제 유형에 맞춘 1:1 수업을 상상코칭에서 상담받아보세요.` : `${school} 학생을 위한 ${meta.level} 학교별 내신 과외. 시험 범위와 출제 경향에 맞춘 1:1 맞춤 수업을 상상코칭에서 상담받아보세요.`;
   const canonicalUrl = new URL(schoolLink(region, district, schoolKey), 'https://studyplus.kr/');
   if (isMath) canonicalUrl.searchParams.set('subject', 'math');
+  if (isEnglish) canonicalUrl.searchParams.set('subject', 'english');
   setPageMetadata(`${region} ${district} ${pageName} | 상상코칭`, description, canonicalUrl.href);
   app.innerHTML = `<section class="school-detail-hero section-wrap"><a class="back-link" href="${isMath ? schoolLink(region, district, schoolKey) : 'school.html'}">← ${isMath ? `${escapeHtml(school)} 과외` : '학교 목록으로'}</a><div class="breadcrumb">학교별 과외 <span>/</span> ${escapeHtml(district)} <span>/</span> ${escapeHtml(school)}${isMath ? ' <span>/</span> 수학' : ''}</div><div class="detail-label"><span>✓ ${isMath ? '수학 내신 분석 완료' : '학교별 분석 완료'}</span><small>${escapeHtml(meta.level)} · ${isMath ? '수학 1:1 전담' : escapeHtml(meta.tag)}</small></div><h1>${escapeHtml(district)} <em>${escapeHtml(school)}</em> ${isMath ? '수학과외' : '과외'}</h1><p>${isMath ? '학교 수학 시험의 진도와 출제 유형을 분석해,<br />개념부터 고난도까지 이어지는 1:1 수업을 시작합니다.' : '학교 시험의 흐름을 읽고, 학생의 현재 위치에서<br />다음 등급까지 이어지는 1:1 전담 수업을 시작합니다.'}</p><div class="school-detail-actions"><a class="primary-button" href="index.html#apply">${escapeHtml(school)} ${isMath ? '수학 ' : ''}맞춤 상담 신청 <span>→</span></a><a class="outline-button" href="tel:01029283614">전화 상담 010-2928-3614</a></div></section><section class="detail-facts section-wrap"><div><span>학교</span><strong>${escapeHtml(school)}</strong></div><div><span>지역</span><strong>${escapeHtml(region)} ${escapeHtml(district)}</strong></div><div><span>대상</span><strong>${escapeHtml(meta.level)} 재학생</strong></div><div><span>과목</span><strong>${isMath ? '수학' : escapeHtml(meta.subjects)}</strong></div></section><section class="school-landing-image section-wrap"><img src="tutoring-landing-page.jpg" alt="초중고 전과목 1대1 맞춤 과외, 학습 과정, 후기 및 무료 상담 안내" loading="lazy" decoding="async" /></section><section class="detail-content section-wrap"><div class="detail-main"><p class="eyebrow">${isMath ? 'SCHOOL MATH TUTORING' : 'WHY SCHOOL-SPECIALIZED'}</p><h2>${detailHeading}</h2><p class="detail-lead">${detailLead}</p><div class="detail-points">${detailPoints}</div></div><aside class="detail-aside"><p class="eyebrow">SUBJECTS</p><h3>과목별 전담 수업</h3><ul>${subjectList}</ul><a href="index.html#apply" class="outline-button">${isMath ? '수학 선생님 추천받기' : '선생님 추천받기'} <span>↗</span></a></aside></section><section class="detail-source"><div class="section-wrap"><span>학교 정보 기준</span><p>학교명과 학교급은 학교알리미 전국학교현황 공개 목록을 참고했습니다. 주소, 학생 수, 설립 구분 등 최신 공시 정보는 원문에서 확인해 주세요.</p><a href="${schoolInfoUrl}" target="_blank" rel="noreferrer">학교알리미 전국학교현황 확인 <span>↗</span></a></div></section><section class="detail-bottom"><div class="section-wrap"><p class="eyebrow">A BETTER START</p><h2>지금 ${escapeHtml(school)}<br /><em>${isMath ? '수학 전담 선생님' : '전담 선생님'}</em>을 만나보세요.</h2><p>무료 체험 수업 후 아이와 맞는지 천천히 결정할 수 있습니다.</p><a class="primary-button" href="index.html#apply">무료 상담 신청 <span>→</span></a></div></section>`;
+  if (isEnglish) {
+    document.querySelector('.school-detail-hero .back-link').href = schoolLink(region, district, schoolKey);
+    document.querySelector('.school-detail-hero .back-link').textContent = `← ${school} 과외`;
+    document.querySelector('.school-detail-hero .breadcrumb').insertAdjacentHTML('beforeend', ' <span>/</span> 영어');
+    document.querySelector('.school-detail-hero .detail-label span').textContent = '✓ 영어 내신 분석 완료';
+    document.querySelector('.school-detail-hero .detail-label small').textContent = `${meta.level} · 영어 1:1 전담`;
+    document.querySelector('.school-detail-hero h1').innerHTML = `${escapeHtml(district)} <em>${escapeHtml(school)}</em> 영어과외`;
+    document.querySelector('.school-detail-hero > p').innerHTML = '학교 영어 시험의 교과서와 출제 유형을 분석해,<br />어휘부터 문법·독해·서술형까지 이어지는 1:1 수업을 시작합니다.';
+    document.querySelector('.school-detail-actions .primary-button').innerHTML = `${escapeHtml(school)} 영어 맞춤 상담 신청 <span>→</span>`;
+    document.querySelector('.detail-facts div:last-child strong').textContent = '영어';
+    document.querySelector('.detail-main .eyebrow').textContent = 'SCHOOL ENGLISH TUTORING';
+    document.querySelector('.detail-main h2').innerHTML = `${escapeHtml(school)} 영어 내신에<br /><em>맞춰야 하는 이유</em>`;
+    document.querySelector('.detail-main .detail-lead').textContent = `${school}의 영어 교과서와 시험 범위, 어휘·문법·독해·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`;
+    document.querySelector('.detail-main .detail-points').innerHTML = '<article><span>01</span><h3>영어 실력 진단</h3><p>어휘, 문법, 독해, 듣기 영역별 현재 수준과 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서와 부교재의 핵심 지문을 분석하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>문장 구조와 영작 과정을 점검하고 유사 문제로 다시 확인해 실수를 줄입니다.</p></article>';
+    document.querySelector('.detail-aside .outline-button').innerHTML = '영어 선생님 추천받기 <span>↗</span>';
+    document.querySelector('.detail-bottom h2').innerHTML = `지금 ${escapeHtml(school)}<br /><em>영어 전담 선생님</em>을 만나보세요.`;
+  }
 }
 
 const searchParams = new URLSearchParams(window.location.search);
