@@ -46,11 +46,11 @@ const regions = {
 };
 
 const schoolMeta = {
-  경기초등학교: { level: '초등학교', subjects: '국어 · 수학 · 영어 · 독서', tag: '초등 기초 전담' },
-  경희초등학교: { level: '초등학교', subjects: '국어 · 수학 · 영어 · 과학', tag: '초등 기초 전담' },
+  경기초등학교: { level: '초등학교', subjects: '국어 · 수학 · 영어 · 과학 · 사회 · 독서', tag: '초등 기초 전담' },
+  경희초등학교: { level: '초등학교', subjects: '국어 · 수학 · 영어 · 과학 · 사회', tag: '초등 기초 전담' },
   휘문중학교: { level: '중학교', subjects: '국어 · 수학 · 영어 · 과학 · 사회', tag: '중등 내신 전담' },
   휘문고: { level: '고등학교', subjects: '국어 · 수학 · 영어 · 과학 · 사회 · 역사', tag: '고등 내신 전담' },
-  경기고: { level: '고등학교', subjects: '국어 · 수학 · 영어 · 과학 · 논술', tag: '고등 내신 전담' },
+  경기고: { level: '고등학교', subjects: '국어 · 수학 · 영어 · 과학 · 사회 · 논술', tag: '고등 내신 전담' },
   숙명여고: { level: '고등학교', subjects: '국어 · 수학 · 영어 · 과학 · 사회', tag: '여고 내신 전담' }
 };
 
@@ -85,7 +85,7 @@ function findSchool(value) {
   const schoolKey = schoolParts.join('|');
   if (!regions[region]?.districts[district]?.includes(schoolKey)) return null;
   const school = getSchoolName(schoolKey);
-  return { region, district, school, schoolKey, meta: schoolMeta[school] || { level: getSchoolLevel(school), subjects: '국어 · 수학 · 영어 · 과학', tag: '학교별 내신 전담' } };
+  return { region, district, school, schoolKey, meta: schoolMeta[school] || { level: getSchoolLevel(school), subjects: '국어 · 수학 · 영어 · 과학 · 사회', tag: '학교별 내신 전담' } };
 }
 
 function schoolLink(region, district, school) {
@@ -183,8 +183,8 @@ function renderDistricts(regionName, query = '') {
 function renderDetail(schoolData, selectedSubject) {
   const { region, district, school, schoolKey, meta } = schoolData;
   const isMath = selectedSubject === 'math';
-  const subjectRoutes = { 국어: 'korean', 수학: 'math', 영어: 'english', 과학: 'science' };
-  const subjectNames = { korean: '국어', math: '수학', english: '영어', science: '과학' };
+  const subjectRoutes = { 국어: 'korean', 수학: 'math', 영어: 'english', 과학: 'science', 사회: 'social' };
+  const subjectNames = { korean: '국어', math: '수학', english: '영어', science: '과학', social: '사회' };
   const selectedSubjectName = subjectNames[selectedSubject];
   const pageName = `${school}${selectedSubjectName ? ` ${selectedSubjectName}과외` : ' 과외'}`;
   const subjectList = meta.subjects.split(' · ').map((subject) => {
@@ -213,6 +213,12 @@ function renderDetail(schoolData, selectedSubject) {
       description: `${school} 학생을 위한 ${meta.level} 과학과외. 학교별 과학 시험 범위와 개념, 탐구, 자료 해석 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
       lead: `${school}의 과학 교과서와 시험 범위, 핵심 개념·탐구·자료 해석·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
       points: '<article><span>01</span><h3>과학 실력 진단</h3><p>단원별 개념 이해도와 계산, 자료 해석 과정의 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 핵심 개념과 탐구 활동을 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>과학 용어와 근거를 정확히 사용하도록 답안 작성 과정을 점검합니다.</p></article>'
+    },
+    social: {
+      name: '사회', eyebrow: 'SCHOOL SOCIAL STUDIES TUTORING', intro: '학교 사회 시험의 단원별 개념과 자료 유형을 분석해,<br />핵심 용어부터 지도·도표 해석과 서술형까지 이어지는 1:1 수업을 시작합니다.',
+      description: `${school} 학생을 위한 ${meta.level} 사회과외. 학교별 사회 시험 범위와 핵심 개념, 자료 해석, 서술형 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
+      lead: `${school}의 사회 교과서와 시험 범위, 핵심 개념·지도·도표·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+      points: '<article><span>01</span><h3>사회 실력 진단</h3><p>단원별 개념 이해도와 용어, 자료 해석 과정의 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 핵심 개념과 지도·도표 자료를 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>핵심 용어와 근거를 연결해 답안을 구성하고 감점 요인을 줄입니다.</p></article>'
     }
   };
   const subjectDetail = subjectDetails[selectedSubject];
