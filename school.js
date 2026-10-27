@@ -79,13 +79,19 @@ const getSchoolLevel = (school) => {
   return schoolMeta[schoolName]?.level || (schoolName.includes('초등학교') || schoolName.endsWith('초') ? '초등학교' : schoolName.includes('중학교') || schoolName.endsWith('중') ? '중학교' : '고등학교');
 };
 
+const defaultSubjects = {
+  초등학교: '국어 · 수학 · 영어 · 과학 · 사회 · 독서',
+  중학교: '국어 · 수학 · 영어 · 과학 · 사회 · 역사 · 독서',
+  고등학교: '국어 · 수학 · 영어 · 과학 · 사회 · 역사 · 논술'
+};
+
 function findSchool(value) {
   if (!value) return null;
   const [region, district, ...schoolParts] = decodeURIComponent(value).split('|');
   const schoolKey = schoolParts.join('|');
   if (!regions[region]?.districts[district]?.includes(schoolKey)) return null;
   const school = getSchoolName(schoolKey);
-  return { region, district, school, schoolKey, meta: schoolMeta[school] || { level: getSchoolLevel(school), subjects: '국어 · 수학 · 영어 · 과학 · 사회', tag: '학교별 내신 전담' } };
+  return { region, district, school, schoolKey, meta: schoolMeta[school] || { level: getSchoolLevel(school), subjects: defaultSubjects[getSchoolLevel(school)], tag: '학교별 내신 전담' } };
 }
 
 function schoolLink(region, district, school) {
@@ -183,8 +189,8 @@ function renderDistricts(regionName, query = '') {
 function renderDetail(schoolData, selectedSubject) {
   const { region, district, school, schoolKey, meta } = schoolData;
   const isMath = selectedSubject === 'math';
-  const subjectRoutes = { 국어: 'korean', 수학: 'math', 영어: 'english', 과학: 'science', 사회: 'social' };
-  const subjectNames = { korean: '국어', math: '수학', english: '영어', science: '과학', social: '사회' };
+  const subjectRoutes = { 국어: 'korean', 수학: 'math', 영어: 'english', 과학: 'science', 사회: 'social', 역사: 'history', 논술: 'essay', 독서: 'reading' };
+  const subjectNames = { korean: '국어', math: '수학', english: '영어', science: '과학', social: '사회', history: '역사', essay: '논술', reading: '독서' };
   const selectedSubjectName = subjectNames[selectedSubject];
   const pageName = `${school}${selectedSubjectName ? ` ${selectedSubjectName}과외` : ' 과외'}`;
   const subjectList = meta.subjects.split(' · ').map((subject) => {
@@ -219,6 +225,24 @@ function renderDetail(schoolData, selectedSubject) {
       description: `${school} 학생을 위한 ${meta.level} 사회과외. 학교별 사회 시험 범위와 핵심 개념, 자료 해석, 서술형 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
       lead: `${school}의 사회 교과서와 시험 범위, 핵심 개념·지도·도표·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
       points: '<article><span>01</span><h3>사회 실력 진단</h3><p>단원별 개념 이해도와 용어, 자료 해석 과정의 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 핵심 개념과 지도·도표 자료를 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>핵심 용어와 근거를 연결해 답안을 구성하고 감점 요인을 줄입니다.</p></article>'
+    },
+    history: {
+      name: '역사', eyebrow: 'SCHOOL HISTORY TUTORING', intro: '학교 역사 시험의 시대별 흐름과 사료 유형을 분석해,<br />핵심 사건부터 사료 해석과 서술형까지 이어지는 1:1 수업을 시작합니다.',
+      description: `${school} 학생을 위한 ${meta.level} 역사과외. 학교별 역사·한국사 시험 범위와 시대 흐름, 사료 해석, 서술형 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
+      lead: `${school}의 역사 교과서와 시험 범위, 시대 흐름·핵심 사건·사료 해석·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+      points: '<article><span>01</span><h3>역사 실력 진단</h3><p>시대별 흐름 이해도와 사건 순서, 사료 해석 과정의 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 핵심 사건과 사료를 연표로 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>원인과 결과, 시대적 배경을 연결해 답안을 구성하고 감점 요인을 줄입니다.</p></article>'
+    },
+    essay: {
+      name: '논술', eyebrow: 'SCHOOL ESSAY TUTORING', intro: '학교 수행평가와 서술형, 대입 논술의 평가 기준을 분석해,<br />제시문 독해부터 개요 작성과 첨삭까지 이어지는 1:1 수업을 시작합니다.',
+      description: `${school} 학생을 위한 ${meta.level} 논술과외. 학교 수행평가와 서술형, 논술 평가 기준에 맞춘 제시문 분석, 개요 작성, 1:1 첨삭 수업을 상담받아보세요.`,
+      lead: `${school}의 수행평가와 서술형 평가 기준, 제시문 독해·논지 구성·근거 제시 방식을 분석해 현재 실력에 맞는 글쓰기 순서를 설계합니다.`,
+      points: '<article><span>01</span><h3>논술 실력 진단</h3><p>제시문 요약, 논지 파악, 문장 구성 과정에서 감점되는 원인을 확인합니다.</p></article><article><span>02</span><h3>평가 기준 맞춤 연습</h3><p>수행평가와 논술 문항의 평가 기준에 맞춰 개요 작성과 답안 구성을 연습합니다.</p></article><article><span>03</span><h3>1:1 첨삭 관리</h3><p>작성한 답안을 문장 단위로 첨삭하고 다시 써 보며 글의 완성도를 높입니다.</p></article>'
+    },
+    reading: {
+      name: '독서', eyebrow: 'SCHOOL READING TUTORING', intro: '학년별 교과 연계 도서와 독해 수준을 분석해,<br />꾸준한 읽기부터 요약·토론·독후 글쓰기까지 이어지는 1:1 수업을 시작합니다.',
+      description: `${school} 학생을 위한 ${meta.level} 독서과외. 교과 연계 도서와 학년별 독해 수준에 맞춘 읽기, 요약, 독후 글쓰기 1:1 수업을 상담받아보세요.`,
+      lead: `${school} 교과 과정과 연계된 도서를 바탕으로 어휘력·독해력·요약·독후 글쓰기 수준을 분석해 현재 실력에 맞는 읽기 순서를 설계합니다.`,
+      points: '<article><span>01</span><h3>독해력 진단</h3><p>어휘, 문장 이해, 글의 구조 파악 수준을 확인해 맞는 도서 단계를 정합니다.</p></article><article><span>02</span><h3>교과 연계 읽기</h3><p>국어·사회·과학 교과와 연계된 도서를 읽고 핵심 내용을 요약하는 연습을 합니다.</p></article><article><span>03</span><h3>독후 활동 관리</h3><p>질문과 토론, 독후 글쓰기로 생각을 정리하고 읽기 습관이 이어지도록 돕습니다.</p></article>'
     }
   };
   const subjectDetail = subjectDetails[selectedSubject];
