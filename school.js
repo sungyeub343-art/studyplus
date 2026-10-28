@@ -80,9 +80,9 @@ const getSchoolLevel = (school) => {
 };
 
 const defaultSubjects = {
-  초등학교: '국어 · 수학 · 영어 · 과학 · 사회 · 독서',
-  중학교: '국어 · 수학 · 영어 · 과학 · 사회 · 역사 · 독서',
-  고등학교: '국어 · 수학 · 영어 · 과학 · 사회 · 역사 · 논술'
+  초등학교: '국어 · 수학 · 영어 · 과학 · 사회 · 독서 · 코딩',
+  중학교: '국어 · 수학 · 영어 · 과학 · 사회 · 역사 · 독서 · 코딩 · 중국어 · 일본어',
+  고등학교: '국어 · 수학 · 영어 · 과학 · 사회 · 역사 · 논술 · 코딩 · 중국어 · 일본어'
 };
 
 function findSchool(value) {
@@ -189,8 +189,8 @@ function renderDistricts(regionName, query = '') {
 function renderDetail(schoolData, selectedSubject) {
   const { region, district, school, schoolKey, meta } = schoolData;
   const isMath = selectedSubject === 'math';
-  const subjectRoutes = { 국어: 'korean', 수학: 'math', 영어: 'english', 과학: 'science', 사회: 'social', 역사: 'history', 논술: 'essay', 독서: 'reading' };
-  const subjectNames = { korean: '국어', math: '수학', english: '영어', science: '과학', social: '사회', history: '역사', essay: '논술', reading: '독서' };
+  const subjectRoutes = { 국어: 'korean', 수학: 'math', 영어: 'english', 과학: 'science', 사회: 'social', 역사: 'history', 논술: 'essay', 독서: 'reading', 코딩: 'coding', 중국어: 'chinese', 일본어: 'japanese' };
+  const subjectNames = { korean: '국어', math: '수학', english: '영어', science: '과학', social: '사회', history: '역사', essay: '논술', reading: '독서', coding: '코딩', chinese: '중국어', japanese: '일본어' };
   const selectedSubjectName = subjectNames[selectedSubject];
   const pageName = `${school}${selectedSubjectName ? ` ${selectedSubjectName}과외` : ' 과외'}`;
   const subjectList = meta.subjects.split(' · ').map((subject) => {
@@ -243,6 +243,24 @@ function renderDetail(schoolData, selectedSubject) {
       description: `${school} 학생을 위한 ${meta.level} 독서과외. 교과 연계 도서와 학년별 독해 수준에 맞춘 읽기, 요약, 독후 글쓰기 1:1 수업을 상담받아보세요.`,
       lead: `${school} 교과 과정과 연계된 도서를 바탕으로 어휘력·독해력·요약·독후 글쓰기 수준을 분석해 현재 실력에 맞는 읽기 순서를 설계합니다.`,
       points: '<article><span>01</span><h3>독해력 진단</h3><p>어휘, 문장 이해, 글의 구조 파악 수준을 확인해 맞는 도서 단계를 정합니다.</p></article><article><span>02</span><h3>교과 연계 읽기</h3><p>국어·사회·과학 교과와 연계된 도서를 읽고 핵심 내용을 요약하는 연습을 합니다.</p></article><article><span>03</span><h3>독후 활동 관리</h3><p>질문과 토론, 독후 글쓰기로 생각을 정리하고 읽기 습관이 이어지도록 돕습니다.</p></article>'
+    },
+    coding: {
+      name: '코딩', eyebrow: 'SCHOOL CODING TUTORING', intro: '학교 정보 교과와 수행평가에서 다루는 내용을 분석해,<br />컴퓨팅 사고부터 프로그래밍과 프로젝트까지 이어지는 1:1 수업을 시작합니다.',
+      description: `${school} 학생을 위한 ${meta.level} 코딩과외. 학교 정보 교과와 수행평가, 블록 코딩부터 파이썬까지 수준에 맞춘 1:1 프로그래밍 수업을 상담받아보세요.`,
+      lead: `${school}의 정보 교과 과정과 수행평가, 알고리즘·프로그래밍·프로젝트 과제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+      points: '<article><span>01</span><h3>코딩 실력 진단</h3><p>논리적 사고, 문법 이해, 문제 해결 과정에서 막히는 지점을 확인합니다.</p></article><article><span>02</span><h3>교과·수행평가 대비</h3><p>정보 교과의 알고리즘과 프로그래밍 과제를 학교 평가 기준에 맞춰 연습합니다.</p></article><article><span>03</span><h3>프로젝트 반복 관리</h3><p>직접 만든 코드를 함께 점검하고 개선하며 스스로 문제를 해결하는 힘을 키웁니다.</p></article>'
+    },
+    chinese: {
+      name: '중국어', eyebrow: 'SCHOOL CHINESE TUTORING', intro: '학교 중국어 시험의 교과서와 출제 유형을 분석해,<br />발음과 성조부터 어휘·문법·회화까지 이어지는 1:1 수업을 시작합니다.',
+      description: `${school} 학생을 위한 ${meta.level} 중국어과외. 학교별 중국어 시험 범위와 발음, 어휘, 문법, 회화 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
+      lead: `${school}의 중국어 교과서와 시험 범위, 발음·성조·어휘·문법·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+      points: '<article><span>01</span><h3>중국어 실력 진단</h3><p>발음과 성조, 한자 어휘, 문법 영역별 현재 수준과 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 본문과 핵심 표현을 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>말하기·쓰기 관리</h3><p>수행평가 회화와 문장 쓰기를 반복 점검해 실전에서 자신 있게 표현하도록 돕습니다.</p></article>'
+    },
+    japanese: {
+      name: '일본어', eyebrow: 'SCHOOL JAPANESE TUTORING', intro: '학교 일본어 시험의 교과서와 출제 유형을 분석해,<br />문자와 어휘부터 문법·독해·회화까지 이어지는 1:1 수업을 시작합니다.',
+      description: `${school} 학생을 위한 ${meta.level} 일본어과외. 학교별 일본어 시험 범위와 문자, 어휘, 문법, 회화 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
+      lead: `${school}의 일본어 교과서와 시험 범위, 히라가나·가타카나·어휘·문법·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+      points: '<article><span>01</span><h3>일본어 실력 진단</h3><p>문자 읽기와 쓰기, 어휘, 문법 영역별 현재 수준과 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 본문과 핵심 표현을 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>말하기·쓰기 관리</h3><p>수행평가 회화와 문장 쓰기를 반복 점검해 실전에서 자신 있게 표현하도록 돕습니다.</p></article>'
     }
   };
   const subjectDetail = subjectDetails[selectedSubject];
