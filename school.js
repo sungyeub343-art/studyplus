@@ -85,6 +85,95 @@ const defaultSubjects = {
   고등학교: '국어 · 수학 · 영어 · 과학 · 사회 · 역사 · 논술 · 코딩 · 중국어 · 일본어'
 };
 
+const subjectRoutes = { 국어: 'korean', 수학: 'math', 영어: 'english', 과학: 'science', 사회: 'social', 역사: 'history', 논술: 'essay', 독서: 'reading', 코딩: 'coding', 중국어: 'chinese', 일본어: 'japanese' };
+const subjectNames = { korean: '국어', math: '수학', english: '영어', science: '과학', social: '사회', history: '역사', essay: '논술', reading: '독서', coding: '코딩', chinese: '중국어', japanese: '일본어' };
+// 검색 노출용 정적 페이지가 생성되는 과목 (tools/build-seo-pages.js)
+const staticSubjects = ['math', 'english'];
+
+function getSubjectDetails(school, meta) {
+  return {
+    math: {
+      name: '수학', eyebrow: 'SCHOOL MATH TUTORING', intro: '학교 수학 시험의 진도와 출제 유형을 분석해,<br />개념부터 고난도까지 이어지는 1:1 수업을 시작합니다.',
+      description: `${school} 학생을 위한 ${meta.level} 수학과외. 학교별 시험 범위와 수학 출제 유형에 맞춘 1:1 수업을 상상코칭에서 상담받아보세요.`,
+      lead: `${school}의 수학 진도와 시험 범위, 서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다. 개념의 빈틈부터 고난도 문제까지 단계별로 연결합니다.`,
+      points: '<article><span>01</span><h3>수학 실력 진단</h3><p>최근 시험과 오답을 분석해 연산, 개념, 응용 중 먼저 보완할 영역을 찾습니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>진도와 출제 유형에 맞춰 서술형, 고난도, 시간 관리 문제를 단계별로 연습합니다.</p></article><article><span>03</span><h3>오답 반복 관리</h3><p>틀린 이유를 기록하고 유사 문제로 다시 확인해 같은 실수를 줄입니다.</p></article>'
+    },
+  korean: {
+    name: '국어', eyebrow: 'SCHOOL KOREAN TUTORING', intro: '학교 국어 시험의 교과서와 작품별 출제 유형을 분석해,<br />문학·독서·문법·서술형까지 이어지는 1:1 수업을 시작합니다.',
+    description: `${school} 학생을 위한 ${meta.level} 국어과외. 학교별 국어 시험 범위와 문학, 독서, 문법 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
+    lead: `${school}의 국어 교과서와 시험 범위, 문학·독서·문법·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+    points: '<article><span>01</span><h3>국어 실력 진단</h3><p>문학, 독서, 문법 영역별 현재 수준과 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 작품과 핵심 지문을 분석하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>근거를 찾고 답안을 구성하는 과정을 점검해 감점 요인을 줄입니다.</p></article>'
+  },
+  english: {
+    name: '영어', eyebrow: 'SCHOOL ENGLISH TUTORING', intro: '학교 영어 시험의 교과서와 출제 유형을 분석해,<br />어휘부터 문법·독해·서술형까지 이어지는 1:1 수업을 시작합니다.',
+    description: `${school} 학생을 위한 ${meta.level} 영어과외. 학교별 영어 시험 범위와 어휘, 문법, 독해 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
+    lead: `${school}의 영어 교과서와 시험 범위, 어휘·문법·독해·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+    points: '<article><span>01</span><h3>영어 실력 진단</h3><p>어휘, 문법, 독해, 듣기 영역별 현재 수준과 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서와 부교재의 핵심 지문을 분석하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>문장 구조와 영작 과정을 점검하고 유사 문제로 다시 확인해 실수를 줄입니다.</p></article>'
+  },
+  science: {
+    name: '과학', eyebrow: 'SCHOOL SCIENCE TUTORING', intro: '학교 과학 시험의 단원별 개념과 출제 유형을 분석해,<br />핵심 원리부터 자료 해석·서술형까지 이어지는 1:1 수업을 시작합니다.',
+    description: `${school} 학생을 위한 ${meta.level} 과학과외. 학교별 과학 시험 범위와 개념, 탐구, 자료 해석 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
+    lead: `${school}의 과학 교과서와 시험 범위, 핵심 개념·탐구·자료 해석·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+    points: '<article><span>01</span><h3>과학 실력 진단</h3><p>단원별 개념 이해도와 계산, 자료 해석 과정의 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 핵심 개념과 탐구 활동을 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>과학 용어와 근거를 정확히 사용하도록 답안 작성 과정을 점검합니다.</p></article>'
+  },
+  social: {
+    name: '사회', eyebrow: 'SCHOOL SOCIAL STUDIES TUTORING', intro: '학교 사회 시험의 단원별 개념과 자료 유형을 분석해,<br />핵심 용어부터 지도·도표 해석과 서술형까지 이어지는 1:1 수업을 시작합니다.',
+    description: `${school} 학생을 위한 ${meta.level} 사회과외. 학교별 사회 시험 범위와 핵심 개념, 자료 해석, 서술형 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
+    lead: `${school}의 사회 교과서와 시험 범위, 핵심 개념·지도·도표·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+    points: '<article><span>01</span><h3>사회 실력 진단</h3><p>단원별 개념 이해도와 용어, 자료 해석 과정의 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 핵심 개념과 지도·도표 자료를 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>핵심 용어와 근거를 연결해 답안을 구성하고 감점 요인을 줄입니다.</p></article>'
+  },
+  history: {
+    name: '역사', eyebrow: 'SCHOOL HISTORY TUTORING', intro: '학교 역사 시험의 시대별 흐름과 사료 유형을 분석해,<br />핵심 사건부터 사료 해석과 서술형까지 이어지는 1:1 수업을 시작합니다.',
+    description: `${school} 학생을 위한 ${meta.level} 역사과외. 학교별 역사·한국사 시험 범위와 시대 흐름, 사료 해석, 서술형 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
+    lead: `${school}의 역사 교과서와 시험 범위, 시대 흐름·핵심 사건·사료 해석·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+    points: '<article><span>01</span><h3>역사 실력 진단</h3><p>시대별 흐름 이해도와 사건 순서, 사료 해석 과정의 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 핵심 사건과 사료를 연표로 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>원인과 결과, 시대적 배경을 연결해 답안을 구성하고 감점 요인을 줄입니다.</p></article>'
+  },
+  essay: {
+    name: '논술', eyebrow: 'SCHOOL ESSAY TUTORING', intro: '학교 수행평가와 서술형, 대입 논술의 평가 기준을 분석해,<br />제시문 독해부터 개요 작성과 첨삭까지 이어지는 1:1 수업을 시작합니다.',
+    description: `${school} 학생을 위한 ${meta.level} 논술과외. 학교 수행평가와 서술형, 논술 평가 기준에 맞춘 제시문 분석, 개요 작성, 1:1 첨삭 수업을 상담받아보세요.`,
+    lead: `${school}의 수행평가와 서술형 평가 기준, 제시문 독해·논지 구성·근거 제시 방식을 분석해 현재 실력에 맞는 글쓰기 순서를 설계합니다.`,
+    points: '<article><span>01</span><h3>논술 실력 진단</h3><p>제시문 요약, 논지 파악, 문장 구성 과정에서 감점되는 원인을 확인합니다.</p></article><article><span>02</span><h3>평가 기준 맞춤 연습</h3><p>수행평가와 논술 문항의 평가 기준에 맞춰 개요 작성과 답안 구성을 연습합니다.</p></article><article><span>03</span><h3>1:1 첨삭 관리</h3><p>작성한 답안을 문장 단위로 첨삭하고 다시 써 보며 글의 완성도를 높입니다.</p></article>'
+  },
+  reading: {
+    name: '독서', eyebrow: 'SCHOOL READING TUTORING', intro: '학년별 교과 연계 도서와 독해 수준을 분석해,<br />꾸준한 읽기부터 요약·토론·독후 글쓰기까지 이어지는 1:1 수업을 시작합니다.',
+    description: `${school} 학생을 위한 ${meta.level} 독서과외. 교과 연계 도서와 학년별 독해 수준에 맞춘 읽기, 요약, 독후 글쓰기 1:1 수업을 상담받아보세요.`,
+    lead: `${school} 교과 과정과 연계된 도서를 바탕으로 어휘력·독해력·요약·독후 글쓰기 수준을 분석해 현재 실력에 맞는 읽기 순서를 설계합니다.`,
+    points: '<article><span>01</span><h3>독해력 진단</h3><p>어휘, 문장 이해, 글의 구조 파악 수준을 확인해 맞는 도서 단계를 정합니다.</p></article><article><span>02</span><h3>교과 연계 읽기</h3><p>국어·사회·과학 교과와 연계된 도서를 읽고 핵심 내용을 요약하는 연습을 합니다.</p></article><article><span>03</span><h3>독후 활동 관리</h3><p>질문과 토론, 독후 글쓰기로 생각을 정리하고 읽기 습관이 이어지도록 돕습니다.</p></article>'
+  },
+  coding: {
+    name: '코딩', eyebrow: 'SCHOOL CODING TUTORING', intro: '학교 정보 교과와 수행평가에서 다루는 내용을 분석해,<br />컴퓨팅 사고부터 프로그래밍과 프로젝트까지 이어지는 1:1 수업을 시작합니다.',
+    description: `${school} 학생을 위한 ${meta.level} 코딩과외. 학교 정보 교과와 수행평가, 블록 코딩부터 파이썬까지 수준에 맞춘 1:1 프로그래밍 수업을 상담받아보세요.`,
+    lead: `${school}의 정보 교과 과정과 수행평가, 알고리즘·프로그래밍·프로젝트 과제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+    points: '<article><span>01</span><h3>코딩 실력 진단</h3><p>논리적 사고, 문법 이해, 문제 해결 과정에서 막히는 지점을 확인합니다.</p></article><article><span>02</span><h3>교과·수행평가 대비</h3><p>정보 교과의 알고리즘과 프로그래밍 과제를 학교 평가 기준에 맞춰 연습합니다.</p></article><article><span>03</span><h3>프로젝트 반복 관리</h3><p>직접 만든 코드를 함께 점검하고 개선하며 스스로 문제를 해결하는 힘을 키웁니다.</p></article>'
+  },
+  chinese: {
+    name: '중국어', eyebrow: 'SCHOOL CHINESE TUTORING', intro: '학교 중국어 시험의 교과서와 출제 유형을 분석해,<br />발음과 성조부터 어휘·문법·회화까지 이어지는 1:1 수업을 시작합니다.',
+    description: `${school} 학생을 위한 ${meta.level} 중국어과외. 학교별 중국어 시험 범위와 발음, 어휘, 문법, 회화 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
+    lead: `${school}의 중국어 교과서와 시험 범위, 발음·성조·어휘·문법·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+    points: '<article><span>01</span><h3>중국어 실력 진단</h3><p>발음과 성조, 한자 어휘, 문법 영역별 현재 수준과 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 본문과 핵심 표현을 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>말하기·쓰기 관리</h3><p>수행평가 회화와 문장 쓰기를 반복 점검해 실전에서 자신 있게 표현하도록 돕습니다.</p></article>'
+  },
+  japanese: {
+    name: '일본어', eyebrow: 'SCHOOL JAPANESE TUTORING', intro: '학교 일본어 시험의 교과서와 출제 유형을 분석해,<br />문자와 어휘부터 문법·독해·회화까지 이어지는 1:1 수업을 시작합니다.',
+    description: `${school} 학생을 위한 ${meta.level} 일본어과외. 학교별 일본어 시험 범위와 문자, 어휘, 문법, 회화 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
+    lead: `${school}의 일본어 교과서와 시험 범위, 히라가나·가타카나·어휘·문법·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
+    points: '<article><span>01</span><h3>일본어 실력 진단</h3><p>문자 읽기와 쓰기, 어휘, 문법 영역별 현재 수준과 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 본문과 핵심 표현을 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>말하기·쓰기 관리</h3><p>수행평가 회화와 문장 쓰기를 반복 점검해 실전에서 자신 있게 표현하도록 돕습니다.</p></article>'
+  }
+  };
+}
+
+const toFileName = (value) => String(value).trim().replace(/[\s/\\?#%&:*"<>|.]+/g, '-').replace(/^-+|-+$/g, '');
+
+function schoolPagePath(region, district, schoolKey, subject = '') {
+  const name = getSchoolName(schoolKey);
+  const sameName = regions[region].districts[district].filter((school) => getSchoolName(school) === name);
+  const suffix = new Set(sameName).size > 1 && schoolKey.includes('|||') ? `-${schoolKey.split('|||')[1]}` : '';
+  return `/tutor/${toFileName(region)}/${toFileName(district)}/${toFileName(name)}${suffix}${subject ? `-${subjectNames[subject]}과외` : ''}.html`;
+}
+
+function districtPagePath(region, district) {
+  return `/tutor/${toFileName(region)}/${toFileName(district)}/`;
+}
+
 function findSchool(value) {
   if (!value) return null;
   const [region, district, ...schoolParts] = decodeURIComponent(value).split('|');
@@ -94,13 +183,13 @@ function findSchool(value) {
   return { region, district, school, schoolKey, meta: schoolMeta[school] || { level: getSchoolLevel(school), subjects: defaultSubjects[getSchoolLevel(school)], tag: '학교별 내신 전담' } };
 }
 
-function schoolLink(region, district, school) {
-  return `school.html?school=${slugify(region, district, school)}`;
+function schoolLink(region, district, school, subject = '') {
+  if (!subject || staticSubjects.includes(subject)) return encodeURI(schoolPagePath(region, district, school, subject));
+  return `school.html?school=${slugify(region, district, school)}&subject=${subject}`;
 }
 
 function districtLink(region, district) {
-  const route = Object.entries(districtRoutes).find(([, [, routeDistrict, routeRegion = '서울']]) => routeDistrict === district && routeRegion === region)?.[0];
-  return route ? `school.html?r=${route}` : '';
+  return encodeURI(districtPagePath(region, district));
 }
 
 function renderDirectory(selectedRegion = '서울') {
@@ -189,84 +278,20 @@ function renderDistricts(regionName, query = '') {
 function renderDetail(schoolData, selectedSubject) {
   const { region, district, school, schoolKey, meta } = schoolData;
   const isMath = selectedSubject === 'math';
-  const subjectRoutes = { 국어: 'korean', 수학: 'math', 영어: 'english', 과학: 'science', 사회: 'social', 역사: 'history', 논술: 'essay', 독서: 'reading', 코딩: 'coding', 중국어: 'chinese', 일본어: 'japanese' };
-  const subjectNames = { korean: '국어', math: '수학', english: '영어', science: '과학', social: '사회', history: '역사', essay: '논술', reading: '독서', coding: '코딩', chinese: '중국어', japanese: '일본어' };
   const selectedSubjectName = subjectNames[selectedSubject];
   const pageName = `${school}${selectedSubjectName ? ` ${selectedSubjectName}과외` : ' 과외'}`;
   const subjectList = meta.subjects.split(' · ').map((subject) => {
     const subjectRoute = subjectRoutes[subject];
-    const subjectPage = subjectRoute ? { href: `${schoolLink(region, district, schoolKey)}&subject=${subjectRoute}`, active: selectedSubject === subjectRoute } : null;
+    const subjectPage = subjectRoute ? { href: schoolLink(region, district, schoolKey, subjectRoute), active: selectedSubject === subjectRoute } : null;
     return subjectPage ? `<li><a class="subject-link${subjectPage.active ? ' active' : ''}" href="${subjectPage.href}"${subjectPage.active ? ' aria-current="page"' : ''}><span>${subject}</span><b>→</b></a></li>` : `<li><span>${subject}</span><b>→</b></li>`;
   }).join('');
   const detailHeading = isMath ? `${escapeHtml(school)} 수학 내신에<br /><em>맞춰야 하는 이유</em>` : `${escapeHtml(school)} 내신에<br /><em>맞춰야 하는 이유</em>`;
   const detailLead = isMath ? `${escapeHtml(school)}의 수학 진도와 시험 범위, 서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다. 개념의 빈틈부터 고난도 문제까지 단계별로 연결합니다.` : `같은 학년이어도 학교마다 진도, 교과서, 서술형의 기준이 다릅니다. ${escapeHtml(school)}의 시험 범위와 자주 나오는 유형을 기준으로 학습 계획을 세우고, 학생의 약점은 기초부터 다시 연결합니다.`;
   const detailPoints = isMath ? '<article><span>01</span><h3>수학 실력 진단</h3><p>최근 시험과 오답을 분석해 연산, 개념, 응용 중 먼저 보완할 영역을 찾습니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>진도와 출제 유형에 맞춰 서술형, 고난도, 시간 관리 문제를 단계별로 연습합니다.</p></article><article><span>03</span><h3>오답 반복 관리</h3><p>틀린 이유를 기록하고 유사 문제로 다시 확인해 같은 실수를 줄입니다.</p></article>' : '<article><span>01</span><h3>시험 범위 진단</h3><p>이번 시험의 범위와 지난 시험 오답을 함께 확인해 꼭 필요한 단원부터 시작합니다.</p></article><article><span>02</span><h3>학교 맞춤 풀이</h3><p>학교의 문제 스타일에 맞춰 서술형, 고난도, 시간 관리까지 단계별로 연습합니다.</p></article><article><span>03</span><h3>수업 후 관리</h3><p>수업 기록과 복습 루틴을 남겨 혼자 공부하는 시간까지 이어지도록 돕습니다.</p></article>';
-  const subjectDetails = {
-    korean: {
-      name: '국어', eyebrow: 'SCHOOL KOREAN TUTORING', intro: '학교 국어 시험의 교과서와 작품별 출제 유형을 분석해,<br />문학·독서·문법·서술형까지 이어지는 1:1 수업을 시작합니다.',
-      description: `${school} 학생을 위한 ${meta.level} 국어과외. 학교별 국어 시험 범위와 문학, 독서, 문법 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
-      lead: `${school}의 국어 교과서와 시험 범위, 문학·독서·문법·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
-      points: '<article><span>01</span><h3>국어 실력 진단</h3><p>문학, 독서, 문법 영역별 현재 수준과 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 작품과 핵심 지문을 분석하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>근거를 찾고 답안을 구성하는 과정을 점검해 감점 요인을 줄입니다.</p></article>'
-    },
-    english: {
-      name: '영어', eyebrow: 'SCHOOL ENGLISH TUTORING', intro: '학교 영어 시험의 교과서와 출제 유형을 분석해,<br />어휘부터 문법·독해·서술형까지 이어지는 1:1 수업을 시작합니다.',
-      description: `${school} 학생을 위한 ${meta.level} 영어과외. 학교별 영어 시험 범위와 어휘, 문법, 독해 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
-      lead: `${school}의 영어 교과서와 시험 범위, 어휘·문법·독해·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
-      points: '<article><span>01</span><h3>영어 실력 진단</h3><p>어휘, 문법, 독해, 듣기 영역별 현재 수준과 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서와 부교재의 핵심 지문을 분석하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>문장 구조와 영작 과정을 점검하고 유사 문제로 다시 확인해 실수를 줄입니다.</p></article>'
-    },
-    science: {
-      name: '과학', eyebrow: 'SCHOOL SCIENCE TUTORING', intro: '학교 과학 시험의 단원별 개념과 출제 유형을 분석해,<br />핵심 원리부터 자료 해석·서술형까지 이어지는 1:1 수업을 시작합니다.',
-      description: `${school} 학생을 위한 ${meta.level} 과학과외. 학교별 과학 시험 범위와 개념, 탐구, 자료 해석 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
-      lead: `${school}의 과학 교과서와 시험 범위, 핵심 개념·탐구·자료 해석·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
-      points: '<article><span>01</span><h3>과학 실력 진단</h3><p>단원별 개념 이해도와 계산, 자료 해석 과정의 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 핵심 개념과 탐구 활동을 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>과학 용어와 근거를 정확히 사용하도록 답안 작성 과정을 점검합니다.</p></article>'
-    },
-    social: {
-      name: '사회', eyebrow: 'SCHOOL SOCIAL STUDIES TUTORING', intro: '학교 사회 시험의 단원별 개념과 자료 유형을 분석해,<br />핵심 용어부터 지도·도표 해석과 서술형까지 이어지는 1:1 수업을 시작합니다.',
-      description: `${school} 학생을 위한 ${meta.level} 사회과외. 학교별 사회 시험 범위와 핵심 개념, 자료 해석, 서술형 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
-      lead: `${school}의 사회 교과서와 시험 범위, 핵심 개념·지도·도표·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
-      points: '<article><span>01</span><h3>사회 실력 진단</h3><p>단원별 개념 이해도와 용어, 자료 해석 과정의 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 핵심 개념과 지도·도표 자료를 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>핵심 용어와 근거를 연결해 답안을 구성하고 감점 요인을 줄입니다.</p></article>'
-    },
-    history: {
-      name: '역사', eyebrow: 'SCHOOL HISTORY TUTORING', intro: '학교 역사 시험의 시대별 흐름과 사료 유형을 분석해,<br />핵심 사건부터 사료 해석과 서술형까지 이어지는 1:1 수업을 시작합니다.',
-      description: `${school} 학생을 위한 ${meta.level} 역사과외. 학교별 역사·한국사 시험 범위와 시대 흐름, 사료 해석, 서술형 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
-      lead: `${school}의 역사 교과서와 시험 범위, 시대 흐름·핵심 사건·사료 해석·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
-      points: '<article><span>01</span><h3>역사 실력 진단</h3><p>시대별 흐름 이해도와 사건 순서, 사료 해석 과정의 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 핵심 사건과 사료를 연표로 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>서술형 반복 관리</h3><p>원인과 결과, 시대적 배경을 연결해 답안을 구성하고 감점 요인을 줄입니다.</p></article>'
-    },
-    essay: {
-      name: '논술', eyebrow: 'SCHOOL ESSAY TUTORING', intro: '학교 수행평가와 서술형, 대입 논술의 평가 기준을 분석해,<br />제시문 독해부터 개요 작성과 첨삭까지 이어지는 1:1 수업을 시작합니다.',
-      description: `${school} 학생을 위한 ${meta.level} 논술과외. 학교 수행평가와 서술형, 논술 평가 기준에 맞춘 제시문 분석, 개요 작성, 1:1 첨삭 수업을 상담받아보세요.`,
-      lead: `${school}의 수행평가와 서술형 평가 기준, 제시문 독해·논지 구성·근거 제시 방식을 분석해 현재 실력에 맞는 글쓰기 순서를 설계합니다.`,
-      points: '<article><span>01</span><h3>논술 실력 진단</h3><p>제시문 요약, 논지 파악, 문장 구성 과정에서 감점되는 원인을 확인합니다.</p></article><article><span>02</span><h3>평가 기준 맞춤 연습</h3><p>수행평가와 논술 문항의 평가 기준에 맞춰 개요 작성과 답안 구성을 연습합니다.</p></article><article><span>03</span><h3>1:1 첨삭 관리</h3><p>작성한 답안을 문장 단위로 첨삭하고 다시 써 보며 글의 완성도를 높입니다.</p></article>'
-    },
-    reading: {
-      name: '독서', eyebrow: 'SCHOOL READING TUTORING', intro: '학년별 교과 연계 도서와 독해 수준을 분석해,<br />꾸준한 읽기부터 요약·토론·독후 글쓰기까지 이어지는 1:1 수업을 시작합니다.',
-      description: `${school} 학생을 위한 ${meta.level} 독서과외. 교과 연계 도서와 학년별 독해 수준에 맞춘 읽기, 요약, 독후 글쓰기 1:1 수업을 상담받아보세요.`,
-      lead: `${school} 교과 과정과 연계된 도서를 바탕으로 어휘력·독해력·요약·독후 글쓰기 수준을 분석해 현재 실력에 맞는 읽기 순서를 설계합니다.`,
-      points: '<article><span>01</span><h3>독해력 진단</h3><p>어휘, 문장 이해, 글의 구조 파악 수준을 확인해 맞는 도서 단계를 정합니다.</p></article><article><span>02</span><h3>교과 연계 읽기</h3><p>국어·사회·과학 교과와 연계된 도서를 읽고 핵심 내용을 요약하는 연습을 합니다.</p></article><article><span>03</span><h3>독후 활동 관리</h3><p>질문과 토론, 독후 글쓰기로 생각을 정리하고 읽기 습관이 이어지도록 돕습니다.</p></article>'
-    },
-    coding: {
-      name: '코딩', eyebrow: 'SCHOOL CODING TUTORING', intro: '학교 정보 교과와 수행평가에서 다루는 내용을 분석해,<br />컴퓨팅 사고부터 프로그래밍과 프로젝트까지 이어지는 1:1 수업을 시작합니다.',
-      description: `${school} 학생을 위한 ${meta.level} 코딩과외. 학교 정보 교과와 수행평가, 블록 코딩부터 파이썬까지 수준에 맞춘 1:1 프로그래밍 수업을 상담받아보세요.`,
-      lead: `${school}의 정보 교과 과정과 수행평가, 알고리즘·프로그래밍·프로젝트 과제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
-      points: '<article><span>01</span><h3>코딩 실력 진단</h3><p>논리적 사고, 문법 이해, 문제 해결 과정에서 막히는 지점을 확인합니다.</p></article><article><span>02</span><h3>교과·수행평가 대비</h3><p>정보 교과의 알고리즘과 프로그래밍 과제를 학교 평가 기준에 맞춰 연습합니다.</p></article><article><span>03</span><h3>프로젝트 반복 관리</h3><p>직접 만든 코드를 함께 점검하고 개선하며 스스로 문제를 해결하는 힘을 키웁니다.</p></article>'
-    },
-    chinese: {
-      name: '중국어', eyebrow: 'SCHOOL CHINESE TUTORING', intro: '학교 중국어 시험의 교과서와 출제 유형을 분석해,<br />발음과 성조부터 어휘·문법·회화까지 이어지는 1:1 수업을 시작합니다.',
-      description: `${school} 학생을 위한 ${meta.level} 중국어과외. 학교별 중국어 시험 범위와 발음, 어휘, 문법, 회화 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
-      lead: `${school}의 중국어 교과서와 시험 범위, 발음·성조·어휘·문법·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
-      points: '<article><span>01</span><h3>중국어 실력 진단</h3><p>발음과 성조, 한자 어휘, 문법 영역별 현재 수준과 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 본문과 핵심 표현을 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>말하기·쓰기 관리</h3><p>수행평가 회화와 문장 쓰기를 반복 점검해 실전에서 자신 있게 표현하도록 돕습니다.</p></article>'
-    },
-    japanese: {
-      name: '일본어', eyebrow: 'SCHOOL JAPANESE TUTORING', intro: '학교 일본어 시험의 교과서와 출제 유형을 분석해,<br />문자와 어휘부터 문법·독해·회화까지 이어지는 1:1 수업을 시작합니다.',
-      description: `${school} 학생을 위한 ${meta.level} 일본어과외. 학교별 일본어 시험 범위와 문자, 어휘, 문법, 회화 출제 유형에 맞춘 1:1 수업을 상담받아보세요.`,
-      lead: `${school}의 일본어 교과서와 시험 범위, 히라가나·가타카나·어휘·문법·서술형 출제 유형을 분석해 현재 실력에 맞는 학습 순서를 설계합니다.`,
-      points: '<article><span>01</span><h3>일본어 실력 진단</h3><p>문자 읽기와 쓰기, 어휘, 문법 영역별 현재 수준과 오답 원인을 확인합니다.</p></article><article><span>02</span><h3>학교별 시험 대비</h3><p>교과서 본문과 핵심 표현을 정리하고 학교 출제 유형에 맞춰 연습합니다.</p></article><article><span>03</span><h3>말하기·쓰기 관리</h3><p>수행평가 회화와 문장 쓰기를 반복 점검해 실전에서 자신 있게 표현하도록 돕습니다.</p></article>'
-    }
-  };
-  const subjectDetail = subjectDetails[selectedSubject];
+  const subjectDetails = getSubjectDetails(school, meta);
+  const subjectDetail = isMath ? null : subjectDetails[selectedSubject];
   const description = isMath ? `${school} 학생을 위한 ${meta.level} 수학과외. 학교별 시험 범위와 수학 출제 유형에 맞춘 1:1 수업을 상상코칭에서 상담받아보세요.` : subjectDetail?.description || `${school} 학생을 위한 ${meta.level} 학교별 내신 과외. 시험 범위와 출제 경향에 맞춘 1:1 맞춤 수업을 상상코칭에서 상담받아보세요.`;
-  const canonicalUrl = new URL(schoolLink(region, district, schoolKey), 'https://studyplus.kr/');
-  if (selectedSubjectName) canonicalUrl.searchParams.set('subject', selectedSubject);
+  const canonicalUrl = new URL(schoolLink(region, district, schoolKey, selectedSubjectName ? selectedSubject : ''), 'https://studyplus.kr/');
   setPageMetadata(`${region} ${district} ${pageName} | 상상코칭`, description, canonicalUrl.href);
   app.innerHTML = `<section class="school-detail-hero section-wrap"><a class="back-link" href="${isMath ? schoolLink(region, district, schoolKey) : 'school.html'}">← ${isMath ? `${escapeHtml(school)} 과외` : '학교 목록으로'}</a><div class="breadcrumb">학교별 과외 <span>/</span> ${escapeHtml(district)} <span>/</span> ${escapeHtml(school)}${isMath ? ' <span>/</span> 수학' : ''}</div><div class="detail-label"><span>✓ ${isMath ? '수학 내신 분석 완료' : '학교별 분석 완료'}</span><small>${escapeHtml(meta.level)} · ${isMath ? '수학 1:1 전담' : escapeHtml(meta.tag)}</small></div><h1>${escapeHtml(district)} <em>${escapeHtml(school)}</em> ${isMath ? '수학과외' : '과외'}</h1><p>${isMath ? '학교 수학 시험의 진도와 출제 유형을 분석해,<br />개념부터 고난도까지 이어지는 1:1 수업을 시작합니다.' : '학교 시험의 흐름을 읽고, 학생의 현재 위치에서<br />다음 등급까지 이어지는 1:1 전담 수업을 시작합니다.'}</p><div class="school-detail-actions"><a class="primary-button" href="index.html#apply">${escapeHtml(school)} ${isMath ? '수학 ' : ''}맞춤 상담 신청 <span>→</span></a><a class="outline-button" href="tel:01029283614">전화 상담 010-2928-3614</a></div></section><section class="detail-facts section-wrap"><div><span>학교</span><strong>${escapeHtml(school)}</strong></div><div><span>지역</span><strong>${escapeHtml(region)} ${escapeHtml(district)}</strong></div><div><span>대상</span><strong>${escapeHtml(meta.level)} 재학생</strong></div><div><span>과목</span><strong>${isMath ? '수학' : escapeHtml(meta.subjects)}</strong></div></section><section class="school-landing-image section-wrap"><img src="tutoring-landing-page.jpg" alt="초중고 전과목 1대1 맞춤 과외, 학습 과정, 후기 및 무료 상담 안내" loading="lazy" decoding="async" /></section><section class="detail-content section-wrap"><div class="detail-main"><p class="eyebrow">${isMath ? 'SCHOOL MATH TUTORING' : 'WHY SCHOOL-SPECIALIZED'}</p><h2>${detailHeading}</h2><p class="detail-lead">${detailLead}</p><div class="detail-points">${detailPoints}</div></div><aside class="detail-aside"><p class="eyebrow">SUBJECTS</p><h3>과목별 전담 수업</h3><ul>${subjectList}</ul><a href="index.html#apply" class="outline-button">${isMath ? '수학 선생님 추천받기' : '선생님 추천받기'} <span>↗</span></a></aside></section><section class="detail-source"><div class="section-wrap"><span>학교 정보 기준</span><p>학교명과 학교급은 학교알리미 전국학교현황 공개 목록을 참고했습니다. 주소, 학생 수, 설립 구분 등 최신 공시 정보는 원문에서 확인해 주세요.</p><a href="${schoolInfoUrl}" target="_blank" rel="noreferrer">학교알리미 전국학교현황 확인 <span>↗</span></a></div></section><section class="detail-bottom"><div class="section-wrap"><p class="eyebrow">A BETTER START</p><h2>지금 ${escapeHtml(school)}<br /><em>${isMath ? '수학 전담 선생님' : '전담 선생님'}</em>을 만나보세요.</h2><p>무료 체험 수업 후 아이와 맞는지 천천히 결정할 수 있습니다.</p><a class="primary-button" href="index.html#apply">무료 상담 신청 <span>→</span></a></div></section>`;
   if (subjectDetail) {
@@ -288,6 +313,7 @@ function renderDetail(schoolData, selectedSubject) {
   }
 }
 
+if (app) {
 const searchParams = new URLSearchParams(window.location.search);
 const selectedSchool = searchParams.get('school');
 const selectedSchoolData = findSchool(selectedSchool);
@@ -305,6 +331,12 @@ const districtRoutes = {
   ...window.nationwideDistrictRoutes
 };
 const selectedDistrict = districtRoutes[searchParams.get('r')];
-if (selectedSchoolData) renderDetail(selectedSchoolData, selectedSubject); else if (selectedDistrict) renderGangdongDirectory(...selectedDistrict); else renderDirectory(regions[selectedRegion] ? selectedRegion : '서울');
+// 예전 쿼리 주소는 검색 노출용 정적 페이지로 이동시킵니다.
+const staticRedirect = selectedSchoolData && (!selectedSubject || staticSubjects.includes(selectedSubject))
+  ? schoolLink(selectedSchoolData.region, selectedSchoolData.district, selectedSchoolData.schoolKey, selectedSubject || '')
+  : !selectedSchoolData && selectedDistrict ? districtLink(selectedDistrict[2] || '서울', selectedDistrict[1]) : '';
+if (staticRedirect) window.location.replace(staticRedirect);
+else if (selectedSchoolData) renderDetail(selectedSchoolData, selectedSubject); else if (selectedDistrict) renderGangdongDirectory(...selectedDistrict); else renderDirectory(regions[selectedRegion] ? selectedRegion : '서울');
 
 document.querySelector('.menu-button').addEventListener('click', () => document.querySelector('.nav-links').classList.toggle('mobile-open'));
+}
